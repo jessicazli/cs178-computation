@@ -1,29 +1,34 @@
 import logo from './logo.svg';
 import './App.css';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from './config/Firebase';
-import BasicTextFields from './components/TextField';
-//import * as React from 'react';
 import React, { useRef, useEffect, useState } from 'react';
 
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 function App() {
 
   //const auth = getAuth();
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("prinpulkes@college.harvard.edu")
+  const [password, setPassword] = useState("test")
 
    async function handleSignUp() {
+    alert('clicked')
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed up 
+      alert('worked')
       const user = userCredential.user;
-      // ...
+      const uid = user.uid
+      
+      // Add to database
     })
     .catch((error) => {
+      
       const errorCode = error.code;
       const errorMessage = error.message;
+      alert(errorMessage)
       // ..
     });
     
@@ -58,6 +63,12 @@ function App() {
           type="password"
           autoComplete="current-password"
         />
+        <Button variant="outlined"
+                onClick={() => {
+                  handleSignUp();
+                }}>
+          Submit
+        </Button>
       </header>
     </div>
   );
