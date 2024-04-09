@@ -1,7 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from './config/Firebase';
+import { auth, db } from './config/Firebase';
+import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 import React, { useRef, useEffect, useState } from 'react';
 
 import TextField from '@mui/material/TextField';
@@ -11,7 +12,7 @@ function App() {
 
   //const auth = getAuth();
   const [email, setEmail] = useState("prinpulkes@college.harvard.edu")
-  const [password, setPassword] = useState("test")
+  const [password, setPassword] = useState("testerwerw")
 
    async function handleSignUp() {
     alert('clicked')
@@ -22,7 +23,19 @@ function App() {
       const user = userCredential.user;
       const uid = user.uid
       
+      
       // Add to database
+      try {
+        // Add a new document in collection "cities"
+        setDoc(doc(db, "users", user.uid), {
+          email: user.email,
+          uid: user.uid
+        });
+        
+        //console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        alert("Error adding document: ", e);
+      }
     })
     .catch((error) => {
       
