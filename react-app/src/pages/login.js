@@ -1,7 +1,6 @@
 import '../App.css';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from '../config/Firebase';
-import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 import React, { useRef, useEffect, useState } from 'react';
 
 import TextField from '@mui/material/TextField';
