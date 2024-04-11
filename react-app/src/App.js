@@ -11,8 +11,8 @@ import Button from '@mui/material/Button';
 function App() {
 
   //const auth = getAuth();
-  const [email, setEmail] = useState("prinpulkes@college.harvard.edu")
-  const [password, setPassword] = useState("testerwerw")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
    async function handleSignUp() {
     alert('clicked')
@@ -68,6 +68,9 @@ function App() {
           required
           id="outlined-required"
           label="Email"
+          onChange={(event) => {
+            setEmail(event.target.value);
+          }}
         />
         <TextField
           required
@@ -75,6 +78,9 @@ function App() {
           label="Password"
           type="password"
           autoComplete="current-password"
+          onChange={(event) => {
+            setPassword(event.target.value);
+          }}
         />
         <Button variant="outlined"
                 onClick={() => {
