@@ -9,6 +9,7 @@ import {
 import SignUp from "./pages/signup";
 import Login from "./pages/login";
 import Profile from "./pages/profile";
+import Cabinet from "./pages/cabinet";
  
 function App() {
     return (
@@ -16,6 +17,10 @@ function App() {
             <Navbar />
             <Routes>
                 <Route exact path="/" element={<Login />} />
+                <Route
+                    path="/cabinet"
+                    element={<Cabinet />}
+                />
                 <Route
                     path="/sign-up"
                     element={<SignUp />}
