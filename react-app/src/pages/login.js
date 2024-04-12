@@ -2,7 +2,7 @@ import '../App.css';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from '../config/Firebase';
 import React, { useRef, useEffect, useState } from 'react';
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 

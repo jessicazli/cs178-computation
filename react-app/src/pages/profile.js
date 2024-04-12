@@ -15,20 +15,18 @@ function Profile() {
 
   //const auth = getAuth();
   const [otherPref, setOtherPref] = useState("")
+  const essentials = ["Eggs", "Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread"]
+  
 
-  async function savePrefs() { 
+  async function savePrefs(hasIngred, index) { 
     //saves preferences (for now is the list of basic ingredients)
     
-
     try {
-      // Add a new document in collection "cities"
       const userRef = doc(db, "users", global.UserID);
       const profileRef = doc(userRef,"ingredients", "All")
-      setDoc(profileRef, {
-        //List ingredients here, false means does not have, true means have
-        candy: false,
-        sugar: true
-      },  { merge: true }); //merge ensures new data is added/overwrites old fields, but other fields are untouched
+      var obj = {} //List ingredients here, false means does not have, true means have
+      obj[essentials[index]] = hasIngred
+      setDoc(profileRef, obj,  { merge: true }); //merge ensures new data is added/overwrites old fields, but other fields are untouched
       
     } catch (e) {
       alert("Error adding document: ", e);
@@ -38,11 +36,9 @@ function Profile() {
       // Add a new document in collection "cities"
       const userRef = doc(db, "users", global.UserID);
       const profileRef = doc(userRef,"ingredients", "Basics")
-      setDoc(profileRef, {
-        //List ingredients here, false means does not have, true means have
-        candy: false,
-        sugar: true
-      },  { merge: true }); //merge ensures new data is added/overwrites old fields, but other fields are untouched
+      var obj = {} //List ingredients here, false means does not have, true means have
+      obj[essentials[index]] = hasIngred
+      setDoc(profileRef, obj,  { merge: true }); //merge ensures new data is added/overwrites old fields, but other fields are untouched
       
     } catch (e) {
       alert("Error adding document: ", e);
@@ -59,12 +55,26 @@ function Profile() {
             Profile
         </p>
         <p>
-            Any other preferences?
+            Essential Ingredients (uncheck the ingredients you don't have)
         </p>
-        <Checkbox 
-          id="basic-ingredients"
-          checked
-        />
+        { essentials.map(function(item, i){
+          return <Checkbox 
+            id={i}
+            defaultChecked
+            onCheckedChange = {(event) => {
+              alert(event); savePrefs(event, i);
+            }}
+          >
+            <div>
+              <p>
+                Test {item}
+              </p>
+
+            </div>
+          </Checkbox>
+        }) 
+        }
+        
         <TextField
           fullWidth
           id="outlined-required"

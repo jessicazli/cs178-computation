@@ -4,6 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from '../config/Firebase';
 import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 import React, { useRef, useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -13,6 +14,8 @@ function SignUp() {
   //const auth = getAuth();
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  let navigate = useNavigate();
+
 
    async function handleSignUp() {
     createUserWithEmailAndPassword(auth, email, password)
@@ -28,6 +31,40 @@ function SignUp() {
           email: user.email,
           uid: user.uid
         });
+
+        try {
+          // Add a new document in collection "cities"
+          const userRef = doc(db, "users", user.uid);
+          const profileRefAll = doc(userRef,"ingredients", "All")
+          const profileRefBasics = doc(userRef,"ingredients", "Basics")
+          setDoc(profileRefAll, {
+            //List ingredients here, false means does not have, true means have
+            "Eggs": true, 
+            "Sugar": true, 
+            "Salt": true,
+            "Pepper": true,
+            "Butter": true,
+            "Flour": true,
+            "Oil": true, 
+            "Sliced Bread": true
+          },  { merge: true }); //merge ensures new data is added/overwrites old fields, but other fields are untouched
+          
+          setDoc(profileRefBasics, {
+            //List ingredients here, false means does not have, true means have
+            "Eggs": true, 
+            "Sugar": true, 
+            "Salt": true,
+            "Pepper": true,
+            "Butter": true,
+            "Flour": true,
+            "Oil": true, 
+            "Sliced Bread": true
+          },  { merge: true }); //merge ensures new data is added/overwrites old fields, but other fields are untouched
+          
+          navigate("/");
+        } catch (e) {
+          alert("Error adding document: ", e);
+      }
         
         //console.log("Document written with ID: ", docRef.id);
       } catch (e) {
@@ -41,6 +78,8 @@ function SignUp() {
       alert(errorMessage)
       // ..
     });
+
+    
     
   }
     
