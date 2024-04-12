@@ -31,7 +31,21 @@ function Profile() {
       
     } catch (e) {
       alert("Error adding document: ", e);
-  }
+    }
+
+    try {
+      // Add a new document in collection "cities"
+      const userRef = doc(db, "users", global.UserID);
+      const profileRef = doc(userRef,"ingredients", "Basics")
+      setDoc(profileRef, {
+        //List ingredients here, false means does not have, true means have
+        candy: false,
+        sugar: true
+      },  { merge: true }); //merge ensures new data is added/overwrites old fields, but other fields are untouched
+      
+    } catch (e) {
+      alert("Error adding document: ", e);
+    }
     
   }
     
