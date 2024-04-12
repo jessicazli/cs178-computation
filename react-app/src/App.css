@@ -30,3 +30,148 @@
   text-align: center;
   padding-bottom: 20px;
 }
+
+/* accordion */
+button,
+h3 {
+  all: unset;
+}
+
+.AccordionRoot {
+  width: 100%;
+  background-color: #c0c9d1;
+}
+
+.AccordionItem {
+  overflow: hidden;
+}
+
+.AccordionInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  font-family: inherit;
+  padding: 10px 20px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.sticky-line {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  border-bottom: 0.4px solid #c0c9d1;
+  border-top: 0.4px solid #c0c9d1;
+  background: white;
+  z-index: 10;
+}
+
+.AccordionInfo2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  font-family: inherit;
+  padding: 10px 0px 10px 20px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.AccordionHeader {
+  display: flex;
+}
+
+.AccordionTrigger {
+  font-family: inherit;
+  background-color: transparent;
+  padding: 10px 20px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 15px;
+  line-height: 1;
+  color: black;
+  background-color: white;
+  pointer-events: none !important;
+}
+
+.AccordionContent {
+  max-height: 320px;
+  overflow: auto;
+  font-size: 15px;
+  color: black;
+  background-color: white;
+}
+
+.AccordionContent .schedule-content {
+  max-height: 160px;
+}
+
+.AccordionContent[data-state="open"] {
+  animation: slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1);
+}
+.AccordionContent[data-state="closed"] {
+  animation: slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.AccordionContentText {
+  padding: 0 20px;
+}
+
+.AccordionChevron {
+  color: black;
+  pointer-events: auto !important;
+  transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
+}
+.AccordionTrigger[data-state="open"] > .AccordionChevron {
+  transform: rotate(180deg);
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+/* food list */
+.food-list {
+  padding-top: 40px;
+}
+
+/* checkbox */
+.CheckboxRoot {
+  background-color: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+}
+
+.CheckboxIndicator {
+  color: black;
+}
