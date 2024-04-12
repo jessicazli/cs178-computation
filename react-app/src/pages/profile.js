@@ -17,18 +17,21 @@ function Profile() {
 
   async function savePrefs() { 
     //saves preferences (for now is the list of basic ingredients)
+    
+
     try {
-        // Add a new document in collection "cities"
-        const userRef = doc(db, "users", global.UserID);
-        const profileRef = doc(userRef,"profile", "preferences")
-        setDoc(profileRef, {
-          candy: false,
-          sugar: true
-        },  { merge: true }); //merge ensures new data is added/overwrites old fields, but other fields are untouched
-        
-      } catch (e) {
-        alert("Error adding document: ", e);
-    }
+      // Add a new document in collection "cities"
+      const userRef = doc(db, "users", global.UserID);
+      const profileRef = doc(userRef,"ingredients", "All")
+      setDoc(profileRef, {
+        //List ingredients here, false means does not have, true means have
+        candy: false,
+        sugar: true
+      },  { merge: true }); //merge ensures new data is added/overwrites old fields, but other fields are untouched
+      
+    } catch (e) {
+      alert("Error adding document: ", e);
+  }
     
   }
     
