@@ -5,6 +5,7 @@ import { auth, db } from '../config/Firebase';
 import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 import React, { useRef, useEffect, useState } from 'react';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+import Checkbox from '../components/checkbox';
 
 
 import TextField from '@mui/material/TextField';
@@ -50,58 +51,6 @@ function Profile() {
   }
     
 
-  const items = [
-    {
-      id: 0,
-      name: 'Cobol'
-    },
-    {
-      id: 1,
-      name: 'JavaScript'
-    },
-    {
-      id: 2,
-      name: 'Basic'
-    },
-    {
-      id: 3,
-      name: 'PHP'
-    },
-    {
-      id: 4,
-      name: 'Java'
-    }
-  ]
-
-  const handleOnSearch = (string, results) => {
-    // onSearch will have as the first callback parameter
-    // the string searched and for the second the results.
-    console.log(string, results)
-  }
-
-  const handleOnHover = (result) => {
-    // the item hovered
-    console.log(result)
-  }
-
-  const handleOnSelect = (item) => {
-    // the item selected
-    console.log(item)
-  }
-
-  const handleOnFocus = () => {
-    console.log('Focused')
-  }
-
-  const formatResult = (item) => {
-    return (
-      <>
-        <span style={{ display: 'block', textAlign: 'left' }}>id: {item.id}</span>
-        <span style={{ display: 'block', textAlign: 'left' }}>name: {item.name}</span>
-      </>
-    )
-  }
-
 
   return (
     <div className="SignUp">
@@ -109,18 +58,13 @@ function Profile() {
         <p>
             Profile
         </p>
-        <ReactSearchAutocomplete
-            items={items}
-            onSearch={handleOnSearch}
-            onHover={handleOnHover}
-            onSelect={handleOnSelect}
-            onFocus={handleOnFocus}
-            autoFocus
-            formatResult={formatResult}
-        />
         <p>
             Any other preferences?
         </p>
+        <Checkbox 
+          id="basic-ingredients"
+          checked
+        />
         <TextField
           fullWidth
           id="outlined-required"
