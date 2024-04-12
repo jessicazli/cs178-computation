@@ -1,31 +1,45 @@
+import logo from '../logo.svg';
 import '../App.css';
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from '../config/Firebase';
+import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 import React, { useRef, useEffect, useState } from 'react';
-import { redirect, useNavigate } from "react-router-dom";
+
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-function Login() {
+function Profile() {
 
   //const auth = getAuth();
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  let navigate = useNavigate();
 
-   async function handleLogin() {
-    signInWithEmailAndPassword(auth, email, password)
+   async function handleSignUp() {
+    createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user; //save as global constant (so know where to access database)
-        // Redirect to another page
-        //alert("worked")
-        navigate("/profile");
+      // Signed up 
+      const user = userCredential.user;
+      const uid = user.uid
+      
+      // Add to database
+      try {
+        // Add a new document in collection "cities"
+        setDoc(doc(db, "users", user.uid), {
+          email: user.email,
+          uid: user.uid
+        });
+        
+        //console.log("Document written with ID: ", docRef.id);
+      } catch (e) {
+        alert("Error adding document: ", e);
+      }
     })
     .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(errorMessage)
+      
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(errorMessage)
+      // ..
     });
     
   }
@@ -36,7 +50,7 @@ function Login() {
     <div className="SignUp">
       <header className="Signup-header">
         <p>
-            Please enter your email and password to log in
+            Profile
         </p>
         
         <TextField
@@ -59,20 +73,13 @@ function Login() {
         />
         <Button variant="outlined"
                 onClick={() => {
-                  handleLogin();
+                  handleSignUp();
                 }}>
-            Login!
+            Sign Up!
         </Button>
-        <a
-          href="/sign-up"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Don't have an account? Sign up here!
-        </a>
       </header>
     </div>
   );
 }
 
-export default Login;
+export default Profile;
