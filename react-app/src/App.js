@@ -29,4 +29,5 @@ function App() {
     );
 }
  
+global.UserID = "";
 export default App;

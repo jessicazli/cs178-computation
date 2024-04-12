@@ -4,6 +4,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from '../config/Firebase';
 import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 import React, { useRef, useEffect, useState } from 'react';
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -11,40 +13,78 @@ import Button from '@mui/material/Button';
 function Profile() {
 
   //const auth = getAuth();
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [otherPref, setOtherPref] = useState("")
 
-   async function handleSignUp() {
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed up 
-      const user = userCredential.user;
-      const uid = user.uid
-      
-      // Add to database
-      try {
+  async function savePrefs() { 
+    //saves preferences (for now is the list of basic ingredients)
+    try {
         // Add a new document in collection "cities"
-        setDoc(doc(db, "users", user.uid), {
-          email: user.email,
-          uid: user.uid
-        });
+        const userRef = doc(db, "users", global.UserID);
+        const profileRef = doc(userRef,"profile", "preferences")
+        setDoc(profileRef, {
+          candy: false,
+          sugar: true
+        },  { merge: true }); //merge ensures new data is added/overwrites old fields, but other fields are untouched
         
-        //console.log("Document written with ID: ", docRef.id);
       } catch (e) {
         alert("Error adding document: ", e);
-      }
-    })
-    .catch((error) => {
-      
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      alert(errorMessage)
-      // ..
-    });
+    }
     
   }
     
-  
+
+  const items = [
+    {
+      id: 0,
+      name: 'Cobol'
+    },
+    {
+      id: 1,
+      name: 'JavaScript'
+    },
+    {
+      id: 2,
+      name: 'Basic'
+    },
+    {
+      id: 3,
+      name: 'PHP'
+    },
+    {
+      id: 4,
+      name: 'Java'
+    }
+  ]
+
+  const handleOnSearch = (string, results) => {
+    // onSearch will have as the first callback parameter
+    // the string searched and for the second the results.
+    console.log(string, results)
+  }
+
+  const handleOnHover = (result) => {
+    // the item hovered
+    console.log(result)
+  }
+
+  const handleOnSelect = (item) => {
+    // the item selected
+    console.log(item)
+  }
+
+  const handleOnFocus = () => {
+    console.log('Focused')
+  }
+
+  const formatResult = (item) => {
+    return (
+      <>
+        <span style={{ display: 'block', textAlign: 'left' }}>id: {item.id}</span>
+        <span style={{ display: 'block', textAlign: 'left' }}>name: {item.name}</span>
+      </>
+    )
+  }
+
 
   return (
     <div className="SignUp">
@@ -52,30 +92,32 @@ function Profile() {
         <p>
             Profile
         </p>
-        
+        <ReactSearchAutocomplete
+            items={items}
+            onSearch={handleOnSearch}
+            onHover={handleOnHover}
+            onSelect={handleOnSelect}
+            onFocus={handleOnFocus}
+            autoFocus
+            formatResult={formatResult}
+        />
+        <p>
+            Any other preferences?
+        </p>
         <TextField
-          required
+          fullWidth
           id="outlined-required"
-          label="Email"
+          label="Other preferences"
           onChange={(event) => {
-            setEmail(event.target.value);
+            setOtherPref(event.target.value);
           }}
         />
-        <TextField
-          required
-          id="outlined-password-input"
-          label="Password"
-          type="password"
-          autoComplete="current-password"
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-        />
+        
         <Button variant="outlined"
                 onClick={() => {
-                  handleSignUp();
+                  alert(global.UserID);savePrefs();
                 }}>
-            Sign Up!
+            Submit Preferences!
         </Button>
       </header>
     </div>
