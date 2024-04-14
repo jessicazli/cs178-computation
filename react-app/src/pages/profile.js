@@ -75,14 +75,14 @@ function Profile() {
         }) 
         }
         
-        <TextField
+        {/*<TextField
           fullWidth
           id="outlined-required"
           label="Other preferences"
           onChange={(event) => {
             setOtherPref(event.target.value);
           }}
-        />
+        />*/}
         
         <Button variant="outlined"
                 onClick={() => {
