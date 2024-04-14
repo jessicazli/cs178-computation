@@ -6,7 +6,9 @@ import { collection, addDoc, setDoc, doc, getDoc } from "firebase/firestore";
 import React, { useRef, useEffect, useState } from 'react';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import Checkbox from '../components/checkbox';
-
+import CheckboxControlled from '../components/checkboxControlled';
+import * as CheckboxOriginal from '@radix-ui/react-checkbox';
+import { CheckIcon } from '@radix-ui/react-icons';
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -17,12 +19,10 @@ function Profile() {
   const [otherPref, setOtherPref] = useState("")
   const [changedEssentials, setChangedEssentials] = useState([])
   const essentials = ["Eggs", "Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread"]
-  const [initial, setInitial] = useState({})
+  const [initial, setInitial] = useState({"Eggs":true, "Sugar":true, "Salt":true, "Pepper":true, "Butter":true, "Flour":true, "Oil":true, "Sliced Bread":true})
 
   useEffect(() => {
     async function startFetching() {
-      //setInitial({});
-      //const result = await fetchInitial();
       const userRef = doc(db, "users", global.UserID);
       const profileRef = doc(userRef,"ingredients", "Basics")
 
@@ -33,14 +33,11 @@ function Profile() {
 
         if (!ignore) {
           setInitial(docSnap.data());
-          
         }
       } else {
         // docSnap.data() will be undefined in this case
         console.log("No such document!");
-        alert("none")
       }
-      
     }
 
     let ignore = false;
@@ -81,11 +78,15 @@ function Profile() {
     } catch (e) {
       alert("Error adding document: ", e);
     }
-    
   }
-    
 
-
+  async function changeInitial(item, event){
+    //Need this to trigger a re-render
+    let newInitial = { ...initial }
+    newInitial[item] = event
+    setInitial(newInitial)
+  }
+  
   return (
     <div className="SignUp">
       <header className="Signup-header">
@@ -97,11 +98,23 @@ function Profile() {
         </p>
         { essentials.map(function(item, i){
           return <div>
-              <Checkbox 
-              id={i}
+            {/*<CheckboxOriginal.Root 
+              className={`CheckboxRoot ${item}`} 
               checked={initial[item]}
               onCheckedChange = {(event) => {
-                changedEssentials.push([event, i]);alert(changedEssentials);
+                changeInitial(item, event);changedEssentials.push([event, i]);
+              }}
+            >
+              <CheckboxOriginal.Indicator className="CheckboxIndicator">
+                  {initial[item] === true && <CheckIcon />}
+              </CheckboxOriginal.Indicator>
+            </CheckboxOriginal.Root> */}
+            
+            <CheckboxControlled 
+              className={item}
+              checked={initial[item]}
+              onCheckedChange = {(event) => {
+                changeInitial(item, event);changedEssentials.push([event, i]);
               }}
             />
           
