@@ -1,15 +1,9 @@
-import logo from '../logo.svg';
 import '../App.css';
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from '../config/Firebase';
 import { collection, addDoc, setDoc, doc, getDoc } from "firebase/firestore"; 
 import React, { useRef, useEffect, useState } from 'react';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
-import Checkbox from '../components/checkbox';
 import CheckboxControlled from '../components/checkboxControlled';
-import * as CheckboxOriginal from '@radix-ui/react-checkbox';
-import { CheckIcon } from '@radix-ui/react-icons';
-
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
@@ -98,17 +92,6 @@ function Profile() {
         </p>
         { essentials.map(function(item, i){
           return <div>
-            {/*<CheckboxOriginal.Root 
-              className={`CheckboxRoot ${item}`} 
-              checked={initial[item]}
-              onCheckedChange = {(event) => {
-                changeInitial(item, event);changedEssentials.push([event, i]);
-              }}
-            >
-              <CheckboxOriginal.Indicator className="CheckboxIndicator">
-                  {initial[item] === true && <CheckIcon />}
-              </CheckboxOriginal.Indicator>
-            </CheckboxOriginal.Root> */}
             
             <CheckboxControlled 
               className={item}
