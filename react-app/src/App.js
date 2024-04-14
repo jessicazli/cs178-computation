@@ -9,6 +9,7 @@ import {
 import SignUp from "./pages/signup";
 import Login from "./pages/login";
 import Cabinet from "./pages/cabinet";
+import Recipe from "./pages/recipe";
  
 function App() {
     return (
@@ -23,6 +24,10 @@ function App() {
                 <Route
                     path="/sign-up"
                     element={<SignUp />}
+                />
+                <Route
+                    path="/recipe"
+                    element={<Recipe />}
                 />
             </Routes>
         </Router>
