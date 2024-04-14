@@ -15,8 +15,14 @@ function Profile() {
 
   //const auth = getAuth();
   const [otherPref, setOtherPref] = useState("")
+  const [changedEssentials, setChangedEssentials] = useState([])
   const essentials = ["Eggs", "Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread"]
   
+  async function handleSubmit() {
+    changedEssentials.forEach((essential) =>{
+      savePrefs(essential[0], essential[1])
+    })
+  }
 
   async function savePrefs(hasIngred, index) { 
     //saves preferences (for now is the list of basic ingredients)
@@ -62,7 +68,7 @@ function Profile() {
             id={i}
             defaultChecked
             onCheckedChange = {(event) => {
-              alert(event); savePrefs(event, i);
+              changedEssentials.push([event, i]);alert(changedEssentials);
             }}
           >
             <div>
@@ -86,7 +92,7 @@ function Profile() {
         
         <Button variant="outlined"
                 onClick={() => {
-                  alert(global.UserID);savePrefs();
+                  alert(global.UserID);handleSubmit();
                 }}>
             Submit Preferences!
         </Button>
