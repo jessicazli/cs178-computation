@@ -30,9 +30,7 @@ function Profile() {
 
       if (docSnap.exists()) {
         console.log("Document data:", docSnap.data());
-        //alert(docSnap.data())
-        //alert(docSnap.data()["Eggs"])
-        //return docSnap.data() //object
+
         if (!ignore) {
           setInitial(docSnap.data());
           
@@ -51,25 +49,6 @@ function Profile() {
       ignore = true;
     }
   }, []);
-  
-  async function fetchInitial(){
-    const userRef = doc(db, "users", global.UserID);
-    const profileRef = doc(userRef,"ingredients", "Basics")
-
-    const docSnap = await getDoc(profileRef);
-
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      //alert(docSnap.data())
-      alert(docSnap.data()["Eggs"])
-      return docSnap.data() //object
-    } else {
-      // docSnap.data() will be undefined in this case
-      console.log("No such document!");
-      alert("none")
-    }
-
-  }
 
   async function handleSubmit() {
     changedEssentials.forEach((essential) =>{
@@ -117,20 +96,20 @@ function Profile() {
             Essential Ingredients (uncheck the ingredients you don't have)
         </p>
         { essentials.map(function(item, i){
-          return <Checkbox 
-            id={i}
-            checked={initial[item]}
-            onCheckedChange = {(event) => {
-              changedEssentials.push([event, i]);alert(changedEssentials);
-            }}
-          >
-            <div>
-              <p>
-                Test {item}
-              </p>
+          return <div>
+              <Checkbox 
+              id={i}
+              checked={initial[item]}
+              onCheckedChange = {(event) => {
+                changedEssentials.push([event, i]);alert(changedEssentials);
+              }}
+            />
+          
+            <p>
+              {item}
+            </p>
 
-            </div>
-          </Checkbox>
+          </div>
         }) 
         }
         
