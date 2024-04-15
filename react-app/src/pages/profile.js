@@ -6,6 +6,10 @@ import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import CheckboxControlled from '../components/checkboxControlled';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { Typography } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+
 
 function Profile() {
 
@@ -81,32 +85,40 @@ function Profile() {
   }
   
   return (
-    <div className="SignUp">
-      <header className="Signup-header">
+    <div className="Profile">
+      <header className="Profile-header">
         <p>
             Profile
         </p>
-        <p>
-            Essential Ingredients (uncheck the ingredients you don't have)
-        </p>
-        { essentials.map(function(item, i){
-          return <div>
-            
-            <CheckboxControlled 
-              className={item}
-              checked={initial[item]}
-              onCheckedChange = {(event) => {
-                changeInitial(item, event);changedEssentials.push([event, i]);
-              }}
-            />
-          
-            <p>
-              {item}
-            </p>
+        <Typography variant="h6" gutterBottom>
+          Essential Ingredients (uncheck the ingredients you don't have)
+        </Typography>
 
-          </div>
-        }) 
-        }
+        <Box sx={{ width: '10%', m: '2rem'}}>
+          
+            { essentials.map(function(item, i){
+              return <Grid container sx={{ flexGrow: 1 }} justifyContent="flex-start" alignContent="flex-start">
+                  <Grid item xs={2}>
+                    <CheckboxControlled 
+                      className={item}
+                      checked={initial[item]}
+                      onCheckedChange = {(event) => {
+                        changeInitial(item, event);changedEssentials.push([event, i]);
+                      }}
+                    />
+                  </Grid>
+                    
+                  <Grid item xs={10} >
+                    <Typography variant="subtitle1" gutterBottom>
+                      {item}
+                    </Typography>
+                  </Grid>
+                </Grid>
+
+            }) 
+            }
+          
+        </Box>
         
         {/*<TextField
           fullWidth

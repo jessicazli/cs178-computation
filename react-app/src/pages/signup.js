@@ -4,6 +4,7 @@ import { auth, db } from '../config/Firebase';
 import { collection, addDoc, setDoc, doc } from "firebase/firestore"; 
 import React, { useRef, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { Typography } from '@mui/material';
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -85,13 +86,17 @@ function SignUp() {
     <div className="SignUp">
       <header className="Signup-header">
         <p>
-            Please enter your email and password (at least 6 characters) below to sign up
+          Sign Up!
         </p>
+        <Typography variant="h6" gutterBottom>
+          Please enter your email and password (at least 6 characters) below to sign up
+        </Typography>
         
         <TextField
           required
           id="outlined-required"
           label="Email"
+          margin="dense" 
           onChange={(event) => {
             setEmail(event.target.value);
           }}
@@ -101,12 +106,13 @@ function SignUp() {
           id="outlined-password-input"
           label="Password"
           type="password"
+          margin="dense" 
           autoComplete="current-password"
           onChange={(event) => {
             setPassword(event.target.value);
           }}
         />
-        <Button variant="outlined"
+        <Button variant="outlined" margin="dense"
                 onClick={() => {
                   handleSignUp();
                 }}>
