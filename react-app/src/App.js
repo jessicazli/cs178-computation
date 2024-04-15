@@ -12,6 +12,7 @@ import SignUp from "./pages/signup";
 import Login from "./pages/login";
 import Profile from "./pages/profile";
 import Cabinet from "./pages/cabinet";
+import Recipe from "./pages/recipe";
  
 function PrivateRoute () {
     const user = global.UserID;
@@ -43,6 +44,10 @@ function App() {
                     <Route
                         path="/profile"
                         element={<Profile />}
+                    />
+                    <Route
+                        path="/recipe"
+                        element={<Recipe />}
                     />
                 </Route>
                 
