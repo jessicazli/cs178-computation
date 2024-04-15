@@ -5,21 +5,20 @@ import {
     BrowserRouter as Router,
     Routes,
     Route,
-    Outlet
+    Outlet,
+    Navigate
 } from "react-router-dom";
 import SignUp from "./pages/signup";
 import Login from "./pages/login";
 import Profile from "./pages/profile";
 import Cabinet from "./pages/cabinet";
  
-function AppLayout() {
-    return (
-        <div>
-            <Navbar />
-            <Outlet />
-        </div>
-        
-    )
+function PrivateRoute () {
+    const user = global.UserID;
+    return user ? <div>
+        <Navbar />
+        <Outlet />
+    </div> : <Navigate to="/" replace />;
 }
 
 function App() {
@@ -27,6 +26,8 @@ function App() {
         <Router>
             
             <Routes>
+
+
                 <Route exact path="/" element={<Login />} /> 
                 
                 <Route
@@ -34,7 +35,7 @@ function App() {
                     element={<SignUp />}
                 />
                 
-                <Route element={<AppLayout />} >
+                <Route element={<PrivateRoute />} >
                     <Route
                         path="/cabinet"
                         element={<Cabinet />}

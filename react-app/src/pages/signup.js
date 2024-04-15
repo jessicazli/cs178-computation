@@ -1,4 +1,3 @@
-import logo from '../logo.svg';
 import '../App.css';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from '../config/Firebase';
@@ -11,13 +10,12 @@ import Button from '@mui/material/Button';
 
 function SignUp() {
 
-  //const auth = getAuth();
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   let navigate = useNavigate();
 
 
-   async function handleSignUp() {
+  async function handleSignUp() {
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed up 
@@ -79,8 +77,6 @@ function SignUp() {
       // ..
     });
 
-    
-    
   }
     
   

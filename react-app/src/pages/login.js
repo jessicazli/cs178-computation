@@ -1,7 +1,7 @@
 import '../App.css';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from '../config/Firebase';
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -20,7 +20,6 @@ function Login() {
         const user = userCredential.user; //save as global constant (so know where to access database)
         global.UserID = user.uid
         // Redirect to another page
-        //alert("worked")
         navigate("/profile");
     })
     .catch((error) => {

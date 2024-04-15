@@ -9,7 +9,6 @@ import Button from '@mui/material/Button';
 
 function Profile() {
 
-  //const auth = getAuth();
   const [otherPref, setOtherPref] = useState("")
   const [changedEssentials, setChangedEssentials] = useState([])
   const essentials = ["Eggs", "Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread"]
@@ -120,7 +119,7 @@ function Profile() {
         
         <Button variant="outlined"
                 onClick={() => {
-                  alert(global.UserID);handleSubmit();
+                  handleSubmit();
                 }}>
             Submit Preferences!
         </Button>
