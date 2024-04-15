@@ -15,9 +15,30 @@
 /* sign up page */
 .SignUp {
   text-align: center;
+  padding-top: 5%;
 }
 
 .Signup-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+/* profile page */
+.profile-checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.Profile {
+  text-align: center;
+}
+
+.Profile-header {
   display: flex;
   flex-direction: column;
   align-items: center;
