@@ -85,7 +85,7 @@ function Recipe() {
             />
           </div>
           <div className="col-sm-6">
-            <label htmlFor="cookingTime" className="form-label">Cooking Time:</label>
+            <label htmlFor="cookingTime" className="form-label">Maximum Cooking Time (in minutes):</label>
             <input
               type="text"
               id="cookingTime"
