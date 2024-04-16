@@ -1,9 +1,10 @@
 import { useState } from "react";
 import OpenAI from "openai";
 import '../App.css';
-import { Button } from "@mui/material";
+import { Button, Icon } from "@mui/material";
 import { auth, db } from '../config/Firebase';
 import { collection, addDoc, setDoc, doc, getDoc } from "firebase/firestore"; 
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
 const openai = new OpenAI({ apiKey: apiKey, dangerouslyAllowBrowser: true });
@@ -153,12 +154,14 @@ function Recipe() {
               <div className="card-body">
                 <div className="save-recipe">
                   <h3 className="card-title">{dish_name}</h3>
-                  <Button className="save-recipe-but"
+                  <Button className="save-recipe-but" endIcon={ <FavoriteBorderIcon/>}
                     onClick={() => {
                       handleSaveRecipe();
                     }}>
                     Save Recipe
+                    
                   </Button> {/* add heart icon, make it space between */}
+                 
                 </div>
                 <p className="card-text">
                   <strong>Cooking Time:</strong> {cooking_time}
