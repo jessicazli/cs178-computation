@@ -196,3 +196,12 @@ h3 {
 .CheckboxIndicator {
   color: black;
 }
+
+/* recipe */
+.save-recipe {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-left: 1%;
+}

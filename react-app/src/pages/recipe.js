@@ -1,5 +1,10 @@
 import { useState } from "react";
 import OpenAI from "openai";
+import '../App.css';
+import { Button } from "@mui/material";
+import { db } from '../config/Firebase';
+import { setDoc, doc, getDoc } from "firebase/firestore"; 
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
 const openai = new OpenAI({ apiKey: apiKey, dangerouslyAllowBrowser: true });
@@ -43,6 +48,25 @@ function Recipe() {
 
     }
 
+    async function handleSaveRecipe() {
+      //save these setResult(recipe_dict.recipe); setCookingTime(recipe_dict.cooking_time);setIngredients(recipe_dict.ingredients);setDishName(recipe_dict.dish_name);
+      
+      try {
+        const userRef = doc(db, "users", global.UserID);
+        const profileRef = doc(userRef,"saved_recipes", dish_name)
+        var obj = {
+          "recipe":result,
+          "cooking_time": cooking_time,
+          "ingredients": ingredients,
+          "dish_name": dish_name
+        } 
+        setDoc(profileRef, obj); //merge ensures new data is added/overwrites old fields, but other fields are untouched
+        alert("Recipe Saved!")
+      } catch (e) {
+        alert("Error adding document: ", e);
+      }
+    }
+
     return (
       <div className="container">
       <h2 className="text-center mb-4">Generate a Recipe</h2>
@@ -61,7 +85,7 @@ function Recipe() {
             />
           </div>
           <div className="col-sm-6">
-            <label htmlFor="cookingTime" className="form-label">Cooking Time:</label>
+            <label htmlFor="cookingTime" className="form-label">Maximum Cooking Time (in minutes):</label>
             <input
               type="text"
               id="cookingTime"
@@ -127,8 +151,19 @@ function Recipe() {
         <div className="row justify-content-center mt-5">
           <div className="col-md-8">
             <div className="card">
+              <div className="card-header">
+                <div className="save-recipe">
+                  <h3 className="card-title" style={{fontWeight: "bold"}}>{dish_name}</h3>
+                  <Button className="save-recipe-but" endIcon={ <FavoriteBorderIcon/>}
+                    onClick={() => {
+                      handleSaveRecipe();
+                    }}>
+                    Save Recipe
+                  </Button> {/* make it space between */}
+                 
+                </div>
+              </div>
               <div className="card-body">
-                <h3 className="card-title">{dish_name}</h3>
                 <p className="card-text">
                   <strong>Cooking Time:</strong> {cooking_time}
                 </p>
@@ -146,6 +181,7 @@ function Recipe() {
                 </p>
               </div>
             </div>
+            <p></p>
           </div>
         </div>
       )}
