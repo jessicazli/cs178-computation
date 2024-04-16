@@ -199,5 +199,9 @@ h3 {
 
 /* recipe */
 .save-recipe {
+  display: flex;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-left: 1%;
 }
