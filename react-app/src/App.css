@@ -196,3 +196,8 @@ h3 {
 .CheckboxIndicator {
   color: black;
 }
+
+/* recipe */
+.save-recipe {
+  justify-content: space-between;
+}
