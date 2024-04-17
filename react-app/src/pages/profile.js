@@ -15,7 +15,7 @@ function Profile() {
 
   const [otherPref, setOtherPref] = useState("")
   const [changedEssentials, setChangedEssentials] = useState([])
-  const essentials = ["Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread"]
+  const essentials = ["Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread", "Beef", "Rice", "Chicken", "Noodles", "Carrots", "Potatoes"]
   const [initial, setInitial] = useState({"Sugar":true, "Salt":true, "Pepper":true, "Butter":true, "Flour":true, "Oil":true, "Sliced Bread":true})
 
   useEffect(() => {
@@ -131,7 +131,7 @@ function Profile() {
         
         <Button variant="outlined"
                 onClick={() => {
-                  handleSubmit();
+                  handleSubmit(); alert("Submitted!");
                 }}>
             Submit Preferences!
         </Button>

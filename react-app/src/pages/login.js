@@ -22,7 +22,7 @@ function Login() {
         const user = userCredential.user; //save as global constant (so know where to access database)
         global.UserID = user.uid
         // Redirect to another page
-        navigate("/profile");
+        navigate("/cabinet");
     })
     .catch((error) => {
         const errorCode = error.code;
