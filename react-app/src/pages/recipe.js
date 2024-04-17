@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import OpenAI from "openai";
 import '../App.css';
 import { Button } from "@mui/material";
 import { db } from '../config/Firebase';
 import { setDoc, doc, getDoc } from "firebase/firestore"; 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { grid } from 'ldrs'
+
+grid.register()
 
 const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
 const openai = new OpenAI({ apiKey: apiKey, dangerouslyAllowBrowser: true });
@@ -19,15 +22,58 @@ function Recipe() {
     const [difficulty, setDifficulty] = useState("");
     const [cookingTimeInput, setCookingTimeInput] = useState("");
     const [dish_name, setDishName] = useState("");
+    const [initial, setInitial] = useState(null);
+
+    useEffect(() => {
+        startFetching();
+    }, []);
+    
+
+    async function startFetching() {
+
+        const userRef = doc(db, "users", global.UserID);
+        const profileRef = doc(userRef,"ingredients", "All")
+    
+        const docSnap = await getDoc(profileRef);
+    
+        if (docSnap.exists()) {
+          console.log("Document data:", docSnap.data());
+    
+          setInitial(docSnap.data());
+        } else {
+          // docSnap.data() will be undefined in this case
+          console.log("No such document!");
+        }
+    }
 
     async function handleSubmit(e) {
+        document.getElementById("loader").style.display = "block";
         e.preventDefault();
         console.log("form submitted");
+
+        let cabinet;
+
+        if (initial != null) {
+            console.log(initial);
+            cabinet = Object.keys(initial).filter(
+                ingredient => initial[ingredient]
+            );
+        }
+
+        console.log(cabinet);
 
         const messages = [
             {
               role: "user",
-              content: `Give me a ${mealType} recipe. Serving size is ${servingSize} people and dietary restrictions are ${dietaryRestrictions}. The difficulty level should be ${difficulty}. Return JSON with the dish_name, cooking time, ingredients list (in an array), and the recipe of course. Do not use newline or slash characters except for inside the recipe string.`,
+              content: `Give me a ${mealType} recipe using only these ingredients: ${cabinet}. 
+              You don't have to use all of these ingredients for the recipe, 
+              but you cannot use any ingredients outside of this list.
+              Please give amounts for the ingredients as well such as 2 eggs or 1 cup of flour. 
+              Serving size is ${servingSize} people and dietary restrictions are ${dietaryRestrictions}. 
+              The difficulty level should be ${difficulty}. 
+              Return JSON with the dish_name, cooking_time, ingredients_list 
+              (in an array), and the recipe of course. 
+              Do not use newline or slash characters except for inside the recipe string.`,
             },
         ];
 
@@ -43,8 +89,10 @@ function Recipe() {
 
         setResult(recipe_dict.recipe);
         setCookingTime(recipe_dict.cooking_time);
-        setIngredients(recipe_dict.ingredients);
+        setIngredients(recipe_dict.ingredients_list);
         setDishName(recipe_dict.dish_name);
+
+        document.getElementById("loader").style.display = "none";
 
     }
 
@@ -145,6 +193,12 @@ function Recipe() {
           <button type="submit" className="btn btn-success">Generate Recipe</button>
         </div>
       </form>
+        <l-grid
+        size="60"
+        speed="1.5" 
+        color="gray" 
+        id="loader"
+        ></l-grid>
     </div>
   </div>
       {result && (
