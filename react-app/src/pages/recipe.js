@@ -7,7 +7,7 @@ import { setDoc, doc, getDoc } from "firebase/firestore";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
-const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
+const openai = new OpenAI({ apiKey: apiKey, dangerouslyAllowBrowser: true });
 
 function Recipe() {
     const [result, setResult] = useState(null);

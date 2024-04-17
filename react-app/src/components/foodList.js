@@ -1,83 +1,133 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/accordion";
+import { auth, db } from '../config/Firebase';
+import { useEffect, useState } from "react";
+import { collection, addDoc, setDoc, doc, getDoc } from "firebase/firestore"; 
 
-function FoodList() {
+function FoodList(activeAccordion) {
+    console.log('active:' + activeAccordion);
+
+    const [essentials, setEssentials] = useState([]);
+
+    useEffect(() => {
+        async function startFetching() {
+            const userRef = doc(db, "users", global.UserID);
+            const profileRef = doc(userRef,"ingredients", "Basics")
+
+            const docSnap = await getDoc(profileRef);
+
+            if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+
+            if (!ignore) {
+                setEssentials(docSnap.data());
+            }
+            } else {
+            // docSnap.data() will be undefined in this case
+            console.log("No basics!");
+            }
+        }
+
+        let ignore = false;
+        startFetching();
+        return () => {
+            ignore = true;
+        }
+    }, []);
+     
     return (
         <div className="food-list"> 
-            <Accordion className="AccordionRoot" type="multiple">
-                <AccordionItem value="proteins">
+            <Accordion className="AccordionRoot" type="single">
+                <AccordionItem value="proteins" data-state={activeAccordion === 'proteins' ? 'open' : 'closed'}>
                     <div className="AccordionInfo sticky-line">
                         Proteins
                         <AccordionTrigger className="first-level" />
                     </div>
                     <AccordionContent>
                         <div className="AccordionInfo2">
-                            list of proteins
+                            - Eggs
+                        </div>
+                        <div className="AccordionInfo2">
+                            - Beef
                         </div>
                     </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="vegetables">
+                <AccordionItem value="vegetables" data-state={activeAccordion === 'vegetables' ? 'open' : 'closed'}>
                     <div className="AccordionInfo sticky-line">
                         Vegetables
                         <AccordionTrigger className="first-level" />
                     </div>
                     <AccordionContent>
                         <div className="AccordionInfo2">
-                            list of vegetables
+                            - Broccoli
+                        </div>
+                        <div className="AccordionInfo2">
+                            - Carrots
                         </div>
                     </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="fruits">
+                <AccordionItem value="fruits" data-state={activeAccordion === 'fruits' ? 'open' : 'closed'}>
                     <div className="AccordionInfo sticky-line">
                         Fruits
                         <AccordionTrigger className="first-level" />
                     </div>
                     <AccordionContent>
                         <div className="AccordionInfo2">
-                            list of fruits
+                            - Pineapple
+                        </div>
+                        <div className="AccordionInfo2">
+                            - Apples
+                        </div>
+                        <div className="AccordionInfo2">
+                            - Watermelon
                         </div>
                     </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="dairy">
+                <AccordionItem value="dairy" data-state={activeAccordion === 'dairy' ? 'open' : 'closed'}>
                     <div className="AccordionInfo sticky-line">
                         Dairy
                         <AccordionTrigger className="first-level" />
                     </div>
                     <AccordionContent>
                         <div className="AccordionInfo2">
-                            list of dairy
+                            - Milk
                         </div>
                     </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="grains">
+                <AccordionItem value="grains" data-state={activeAccordion === 'grains' ? 'open' : 'closed'}>
                     <div className="AccordionInfo sticky-line">
                         Grains
                         <AccordionTrigger className="first-level" />
                     </div>
                     <AccordionContent>
                         <div className="AccordionInfo2">
-                            list of grains
+                            - Pasta
+                        </div>
+                        <div className="AccordionInfo2">
+                            - Rice
                         </div>
                     </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="basic">
+                <AccordionItem value="essentials" data-state={activeAccordion === 'essentials' ? 'open' : 'closed'}>
                     <div className="AccordionInfo sticky-line">
-                        Basic Ingredients
+                        Essentials
                         <AccordionTrigger className="first-level" />
                     </div>
                     <AccordionContent>
-                        <div className="AccordionInfo2">
-                            list of basic ingredients
-                        </div>
+                        {Object.keys(essentials).map((key) => (
+                            <div className="AccordionInfo2" key={key}>
+                                - {key}
+                            </div>
+                        ))}
                     </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="other">
+                <AccordionItem value="other" data-state={activeAccordion === 'other' ? 'open' : 'closed'}>
                     <div className="AccordionInfo sticky-line">
                         Other
                         <AccordionTrigger className="first-level" />
                     </div>
                     <AccordionContent>
                         <div className="AccordionInfo2">
-                            list of other
+                            - Honey
                         </div>
                     </AccordionContent>
                 </AccordionItem>
