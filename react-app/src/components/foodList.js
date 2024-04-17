@@ -20,11 +20,9 @@ function FoodList() {
                         Vegetables
                         <AccordionTrigger className="first-level" />
                     </div>
-                    <AccordionContent>
-                        <div className="AccordionInfo2">
-                            list of vegetables
-                        </div>
-                    </AccordionContent>
+                <AccordionContent>
+                    list of vegetables
+                </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="fruits">
                         <div className="AccordionInfo sticky-line">
@@ -32,9 +30,7 @@ function FoodList() {
                             <AccordionTrigger className="first-level" />
                         </div>
                     <AccordionContent>
-                        <div className="AccordionInfo2">
-                            list of fruits
-                        </div>
+                        list of fruits
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="dairy">
@@ -43,9 +39,7 @@ function FoodList() {
                             <AccordionTrigger className="first-level" />
                         </div>
                     <AccordionContent>
-                        <div className="AccordionInfo2">
-                            list of dairy
-                        </div>
+                        list of dairy
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="grains">
@@ -54,9 +48,7 @@ function FoodList() {
                             <AccordionTrigger className="first-level" />
                         </div>
                     <AccordionContent>
-                        <div className="AccordionInfo2">
-                            list of grains
-                        </div>
+                        list of grains
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="basic">
@@ -65,9 +57,7 @@ function FoodList() {
                             <AccordionTrigger className="first-level" />
                         </div>
                     <AccordionContent>
-                        <div className="AccordionInfo2">
-                            list of basic ingredients
-                        </div>
+                        list of basic
                     </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="other">
@@ -76,9 +66,7 @@ function FoodList() {
                             <AccordionTrigger className="first-level" />
                         </div>
                     <AccordionContent>
-                        <div className="AccordionInfo2">
-                            list of other
-                        </div>
+                        list of other
                     </AccordionContent>
                 </AccordionItem>
             </Accordion>
