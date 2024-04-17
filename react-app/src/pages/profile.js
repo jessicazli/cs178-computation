@@ -15,8 +15,8 @@ function Profile() {
 
   const [otherPref, setOtherPref] = useState("")
   const [changedEssentials, setChangedEssentials] = useState([])
-  const essentials = ["Eggs", "Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread"]
-  const [initial, setInitial] = useState({"Eggs":true, "Sugar":true, "Salt":true, "Pepper":true, "Butter":true, "Flour":true, "Oil":true, "Sliced Bread":true})
+  const essentials = ["Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread"]
+  const [initial, setInitial] = useState({"Sugar":true, "Salt":true, "Pepper":true, "Butter":true, "Flour":true, "Oil":true, "Sliced Bread":true})
 
   useEffect(() => {
     async function startFetching() {
