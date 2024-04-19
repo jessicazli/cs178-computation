@@ -303,6 +303,10 @@ h3 {
   padding-left: 1%;
 }
 
+.recipe-boxes {
+  margin: 20px;
+}
+
 /* images */
 .images {
   position: relative;

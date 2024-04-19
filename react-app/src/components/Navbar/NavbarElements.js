@@ -16,7 +16,7 @@ const Navbar = () => {
                         Find a Recipe
                     </NavLink>
                     <NavLink to="/saved" activeStyle>
-                        Saved
+                        My Cookbook
                     </NavLink>
                     <NavLink to="/profile" activeStyle>
                         Profile

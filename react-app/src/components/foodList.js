@@ -36,7 +36,7 @@ function FoodList(activeAccordion) {
      
     return (
         <div className="food-list"> 
-            <Accordion className="AccordionRoot" type="single">
+            <Accordion className="AccordionRoot" type="multiple">
                 <AccordionItem value="proteins" data-state={activeAccordion === 'proteins' ? 'open' : 'closed'}>
                     <div className="AccordionInfo sticky-line">
                         Proteins
