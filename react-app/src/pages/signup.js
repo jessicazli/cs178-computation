@@ -62,7 +62,8 @@ function SignUp() {
             "Beef": true, "Rice":true, "Chicken":true, "Noodles":true, "Carrots":true, "Potatoes":true
           },  { merge: true }); //merge ensures new data is added/overwrites old fields, but other fields are untouched
           
-          global.UserID = user.uid
+          // Storing data in SessionStorage
+          sessionStorage.setItem("UserID", user.uid);
           navigate("/profile");
         } catch (e) {
           alert("Error adding document: ", e);
