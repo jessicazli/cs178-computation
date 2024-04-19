@@ -20,7 +20,10 @@ function Profile() {
 
   useEffect(() => {
     async function startFetching() {
-      const userRef = doc(db, "users", global.UserID);
+      // Retrieving data from SessionStorage
+      const UserID = sessionStorage.getItem('UserID');
+
+      const userRef = doc(db, "users", UserID);
       const profileRef = doc(userRef,"ingredients", "Basics")
 
       const docSnap = await getDoc(profileRef);
@@ -54,7 +57,10 @@ function Profile() {
     //saves preferences (for now is the list of basic ingredients)
     
     try {
-      const userRef = doc(db, "users", global.UserID);
+      // Retrieving data from SessionStorage
+      const UserID = sessionStorage.getItem('UserID');
+
+      const userRef = doc(db, "users", UserID);
       const profileRef = doc(userRef,"ingredients", "All")
       var obj = {} //List ingredients here, false means does not have, true means have
       obj[essentials[index]] = hasIngred
@@ -65,8 +71,10 @@ function Profile() {
     }
 
     try {
+      // Retrieving data from SessionStorage
+      const UserID = sessionStorage.getItem('UserID');
       // Add a new document in collection "cities"
-      const userRef = doc(db, "users", global.UserID);
+      const userRef = doc(db, "users", UserID);
       const profileRef = doc(userRef,"ingredients", "Basics")
       var obj = {} //List ingredients here, false means does not have, true means have
       obj[essentials[index]] = hasIngred

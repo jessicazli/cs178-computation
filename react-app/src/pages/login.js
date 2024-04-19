@@ -20,7 +20,9 @@ function Login() {
     .then((userCredential) => {
         // Signed in 
         const user = userCredential.user; //save as global constant (so know where to access database)
-        global.UserID = user.uid
+        // Storing data in SessionStorage
+        sessionStorage.setItem("UserID", user.uid);
+        
         // Redirect to another page
         navigate("/cabinet");
     })
