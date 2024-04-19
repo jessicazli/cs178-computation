@@ -64,6 +64,8 @@ function SignUp() {
           
           // Storing data in SessionStorage
           sessionStorage.setItem("UserID", user.uid);
+
+          sessionStorage.setItem("firstTime", true);
           navigate("/profile");
         } catch (e) {
           alert("Error adding document: ", e);

@@ -8,10 +8,16 @@ function Cabinet() {
   // TODO: have to figure out clicking on the images to open the correct accordion
 
   const [activeAccordion, setActiveAccordion] = useState(null);
+  const [openEssentials, setOpenEssentials] = useState(sessionStorage.getItem("firstTime"));
 
   const handleImageClick = (accordionName) => {
     setActiveAccordion(accordionName);
   };
+
+  function handleClose() {
+    setOpenEssentials(false)
+    sessionStorage.setItem("firstTime", false)
+  }
 
   return (
     <div>
@@ -49,6 +55,20 @@ function Cabinet() {
             </DialogPortal>
           </Dialog>
           <FoodList activeAccordion={activeAccordion} />
+
+          {/* Essentials dialog */}
+          <Dialog open = {openEssentials} onOpenChange={setOpenEssentials}>
+            {openEssentials === true && 
+              <DialogPortal>
+                <DialogOverlay className="DialogOverlay"/>
+                <DialogContent className="DialogContent">
+                    {/* add content here */}
+                    <DialogCloseButton className="IconButton" onClick={() => {
+                        handleClose();
+                      }}/>
+                </DialogContent>
+            </DialogPortal>}
+          </Dialog>
         </div>
       </div>
 
