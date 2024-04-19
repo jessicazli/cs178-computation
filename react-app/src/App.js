@@ -15,7 +15,7 @@ import Cabinet from "./pages/cabinet";
 import Recipe from "./pages/recipe";
  
 function PrivateRoute () {
-    const user = global.UserID;
+    const user = sessionStorage.getItem('UserID');
     return user ? <div>
         <Navbar />
         <Outlet />
@@ -56,5 +56,4 @@ function App() {
     );
 }
  
-global.UserID = "";
 export default App;

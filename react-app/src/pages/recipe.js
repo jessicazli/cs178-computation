@@ -31,19 +31,22 @@ function Recipe() {
 
     async function startFetching() {
 
-        const userRef = doc(db, "users", global.UserID);
-        const profileRef = doc(userRef,"ingredients", "All")
-    
-        const docSnap = await getDoc(profileRef);
-    
-        if (docSnap.exists()) {
-          console.log("Document data:", docSnap.data());
-    
-          setInitial(docSnap.data());
-        } else {
-          // docSnap.data() will be undefined in this case
-          console.log("No such document!");
-        }
+      // Retrieving data from SessionStorage
+      const UserID = sessionStorage.getItem('UserID');
+
+      const userRef = doc(db, "users", UserID);
+      const profileRef = doc(userRef,"ingredients", "All")
+  
+      const docSnap = await getDoc(profileRef);
+  
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+  
+        setInitial(docSnap.data());
+      } else {
+        // docSnap.data() will be undefined in this case
+        console.log("No such document!");
+      }
     }
 
     async function handleSubmit(e) {
@@ -100,7 +103,10 @@ function Recipe() {
       //save these setResult(recipe_dict.recipe); setCookingTime(recipe_dict.cooking_time);setIngredients(recipe_dict.ingredients);setDishName(recipe_dict.dish_name);
       
       try {
-        const userRef = doc(db, "users", global.UserID);
+        // Retrieving data from SessionStorage
+        const UserID = sessionStorage.getItem('UserID');
+
+        const userRef = doc(db, "users", UserID);
         const profileRef = doc(userRef,"saved_recipes", dish_name)
         var obj = {
           "recipe":result,

@@ -13,7 +13,8 @@ function FoodList({ activeAccordion }) {
         let ignore = false;
 
         async function fetchIngredients() {
-            const userRef = doc(db, "users", global.UserID);
+            const UserID = sessionStorage.getItem('UserID');
+            const userRef = doc(db, "users", UserID);
 
             const fetchData = async (category) => {
                 const ref = doc(userRef, "ingredients", category);
