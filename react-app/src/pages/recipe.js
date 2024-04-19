@@ -10,7 +10,7 @@ import { grid } from 'ldrs'
 grid.register()
 
 const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
-const openai = new OpenAI({ apiKey: apiKey, dangerouslyAllowBrowser: true });
+const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
 
 function Recipe() {
     const [result, setResult] = useState(null);
