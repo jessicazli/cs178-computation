@@ -10,7 +10,10 @@ function FoodList(activeAccordion) {
 
     useEffect(() => {
         async function startFetching() {
-            const userRef = doc(db, "users", global.UserID);
+            // Retrieving data from SessionStorage
+            const UserID = sessionStorage.getItem('UserID');
+
+            const userRef = doc(db, "users", UserID);
             const profileRef = doc(userRef,"ingredients", "Basics")
 
             const docSnap = await getDoc(profileRef);
