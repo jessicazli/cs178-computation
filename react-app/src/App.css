@@ -70,21 +70,6 @@ h3 {
   overflow: hidden;
 }
 
-.AccordionInfo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: white;
-  font-family: inherit;
-  padding: 10px 20px;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 15px;
-  line-height: 1;
-}
-
 .sticky-line {
   position: -webkit-sticky;
   position: sticky;
@@ -117,7 +102,7 @@ h3 {
 .AccordionTrigger {
   font-family: inherit;
   background-color: transparent;
-  padding: 10px 20px;
+  padding: 20px 40px;
   flex: 1;
   display: flex;
   align-items: center;
@@ -126,7 +111,6 @@ h3 {
   line-height: 1;
   color: black;
   background-color: white;
-  pointer-events: none !important;
 }
 
 .AccordionContent {
