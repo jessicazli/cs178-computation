@@ -45,8 +45,7 @@ function SignUp() {
             "Butter": true,
             "Flour": true,
             "Oil": true, 
-            "Sliced Bread": true,
-            "Beef": true, "Rice":true, "Chicken":true, "Noodles":true, "Carrots":true, "Potatoes":true
+            "Sliced Bread": true
           },  { merge: true }); //merge ensures new data is added/overwrites old fields, but other fields are untouched
           
           setDoc(profileRefBasics, {
@@ -58,8 +57,7 @@ function SignUp() {
             "Butter": true,
             "Flour": true,
             "Oil": true, 
-            "Sliced Bread": true,
-            "Beef": true, "Rice":true, "Chicken":true, "Noodles":true, "Carrots":true, "Potatoes":true
+            "Sliced Bread": true
           },  { merge: true }); //merge ensures new data is added/overwrites old fields, but other fields are untouched
           
           global.UserID = user.uid
