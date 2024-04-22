@@ -1,14 +1,55 @@
 import { Dialog, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogCloseButton } from "../components/dialog";
 import FoodList from "../components/foodList";
 import AddGroceries from "../components/addGroceries";
-import { useState } from "react";
+import { db } from '../config/Firebase';
+import { collection, addDoc, setDoc, doc, getDoc } from "firebase/firestore"; 
+import React, { useEffect, useState } from 'react';
+import CheckboxControlled from '../components/checkboxControlled';
+import Button from '@mui/material/Button';
+import { Typography } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
 function Cabinet() {
 
   // TODO: have to figure out clicking on the images to open the correct accordion
 
   const [activeAccordion, setActiveAccordion] = useState(null);
-  const [openEssentials, setOpenEssentials] = useState(sessionStorage.getItem("firstTime"));
+  //const [openEssentials, setOpenEssentials] = useState(sessionStorage.getItem("firstTime"));
+  const [openEssentials, setOpenEssentials] = useState(true); //for test
+  const [otherPref, setOtherPref] = useState("")
+  const [changedEssentials, setChangedEssentials] = useState([])
+  const essentials = ["Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread", "Beef", "Rice", "Chicken", "Noodles", "Carrots", "Potatoes"]
+  const [initial, setInitial] = useState({"Sugar":true, "Salt":true, "Pepper":true, "Butter":true, "Flour":true, "Oil":true, "Sliced Bread":true})
+
+  useEffect(() => {
+    async function startFetching() {
+      // Retrieving data from SessionStorage
+      const UserID = sessionStorage.getItem('UserID');
+
+      const userRef = doc(db, "users", UserID);
+      const profileRef = doc(userRef,"ingredients", "Basics")
+
+      const docSnap = await getDoc(profileRef);
+
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+
+        if (!ignore) {
+          setInitial(docSnap.data());
+        }
+      } else {
+        // docSnap.data() will be undefined in this case
+        console.log("No such document!");
+      }
+    }
+
+    let ignore = false;
+    startFetching();
+    return () => {
+      ignore = true;
+    }
+  }, []);
 
   const handleImageClick = (accordionName) => {
     setActiveAccordion(accordionName);
@@ -17,6 +58,51 @@ function Cabinet() {
   function handleClose() {
     setOpenEssentials(false)
     sessionStorage.setItem("firstTime", false)
+  }
+
+  async function handleSubmit() {
+    changedEssentials.forEach((essential) =>{
+      savePrefs(essential[0], essential[1])
+    })
+  }
+
+  async function savePrefs(hasIngred, index) { 
+    //saves preferences (for now is the list of basic ingredients)
+    
+    try {
+      // Retrieving data from SessionStorage
+      const UserID = sessionStorage.getItem('UserID');
+
+      const userRef = doc(db, "users", UserID);
+      const profileRef = doc(userRef,"ingredients", "All")
+      var obj = {} //List ingredients here, false means does not have, true means have
+      obj[essentials[index]] = hasIngred
+      setDoc(profileRef, obj,  { merge: true }); //merge ensures new data is added/overwrites old fields, but other fields are untouched
+      
+    } catch (e) {
+      alert("Error adding document: ", e);
+    }
+
+    try {
+      // Retrieving data from SessionStorage
+      const UserID = sessionStorage.getItem('UserID');
+      // Add a new document in collection "cities"
+      const userRef = doc(db, "users", UserID);
+      const profileRef = doc(userRef,"ingredients", "Basics")
+      var obj = {} //List ingredients here, false means does not have, true means have
+      obj[essentials[index]] = hasIngred
+      setDoc(profileRef, obj,  { merge: true }); //merge ensures new data is added/overwrites old fields, but other fields are untouched
+      
+    } catch (e) {
+      alert("Error adding document: ", e);
+    }
+  }
+
+  async function changeInitial(item, event){
+    //Need this to trigger a re-render
+    let newInitial = { ...initial }
+    newInitial[item] = event
+    setInitial(newInitial)
   }
 
   return (
@@ -63,10 +149,45 @@ function Cabinet() {
                 <DialogOverlay className="DialogOverlay"/>
                 <DialogContent className="DialogContent">
                     {/* add content here */}
-                    <DialogCloseButton className="IconButton" onClick={() => {
+                    <Typography variant="subtitle1" gutterBottom>
+                      Essential Ingredients (uncheck the ingredients you don't have)
+                    </Typography>
+
+                    <Box sx={{ width: '50%', m: '2rem'}}>
+                      
+                        { essentials.map(function(item, i){
+                          return <Grid container sx={{ flexGrow: 1 }} justifyContent="flex-start" alignContent="flex-start">
+                              <Grid item xs={2}>
+                                <CheckboxControlled 
+                                  className={item}
+                                  checked={initial[item]}
+                                  onCheckedChange = {(event) => {
+                                    changeInitial(item, event);changedEssentials.push([event, i]);
+                                  }}
+                                />
+                              </Grid>
+                                
+                              <Grid item xs={10} >
+                                <Typography variant="subtitle1" gutterBottom>
+                                  {item}
+                                </Typography>
+                              </Grid>
+                            </Grid>
+
+                        }) 
+                        }
+                      
+                    </Box>
+                    <Button variant="outlined"
+                            onClick={() => {
+                              handleSubmit(); alert("Submitted!");handleClose();
+                            }}>
+                        Submit Preferences!
+                    </Button>
+                    {/*<DialogCloseButton className="IconButton" onClick={() => {
                         handleClose();
-                      }}/>
-                </DialogContent>
+                      }}/>*/}
+                    </DialogContent>
             </DialogPortal>}
           </Dialog>
         </div>
