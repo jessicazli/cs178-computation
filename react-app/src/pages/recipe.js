@@ -6,11 +6,29 @@ import { db } from '../config/Firebase';
 import { setDoc, doc, getDoc } from "firebase/firestore"; 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { grid } from 'ldrs'
+import MultipleSelect from "../components/multiSelect";
+import * as React from 'react';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 grid.register()
 
 const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
 const openai = new OpenAI({ apiKey: apiKey, dangerouslyAllowBrowser: true });
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 function Recipe() {
     const [result, setResult] = useState(null);
@@ -23,6 +41,19 @@ function Recipe() {
     const [cookingTimeInput, setCookingTimeInput] = useState("");
     const [dish_name, setDishName] = useState("");
     const [initial, setInitial] = useState(null);
+
+    const [itemNames, setItemNames] = React.useState([]);
+  
+    const handleChange = (event) => {
+      const {
+        target: { value },
+      } = event;
+      setItemNames(
+        // On autofill we get a stringified value.
+        typeof value === 'string' ? value.split(',') : value,
+      );
+    };
+    const dietaryPrefList = ['Vegetarian', 'Vegan', 'Gluten-Free', 'Dairy-Free']
 
     useEffect(() => {
         startFetching();
@@ -181,7 +212,29 @@ function Recipe() {
           </div>
         </div>
         <div className="mb-3">
-          <label htmlFor="dietaryRestrictions" className="form-label">Dietary Restrictions:</label>
+          
+          <FormControl sx={{ m: 1, width: 300 }}>
+          <InputLabel id="demo-multiple-name-label">Dietary Restrictions</InputLabel>
+          <Select
+            labelId="demo-multiple-name-label"
+            id="demo-multiple-name"
+            multiple
+            value={itemNames}
+            onChange={handleChange}
+            input={<OutlinedInput label="Name"/>}
+            MenuProps={MenuProps}
+          >
+            {dietaryPrefList.map((item) => (
+              <MenuItem
+                key={item}
+                value={item}
+              >
+                {item}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+          {/*<label htmlFor="dietaryRestrictions" className="form-label">Dietary Restrictions:</label>
           <select
             id="dietaryRestrictions"
             className="form-select"
@@ -193,7 +246,7 @@ function Recipe() {
             <option value="Vegan">Vegan</option>
             <option value="Gluten-free">Gluten-free</option>
             <option value="Dairy-free">Dairy-free</option>
-          </select>
+          </select> */}
         </div>
         <div className="text-center">
           <button type="submit" className="btn btn-success">Generate Recipe</button>
