@@ -23,35 +23,6 @@ function Cabinet() {
   const essentials = ["Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread"]
   const [initial, setInitial] = useState({"Sugar":true, "Salt":true, "Pepper":true, "Butter":true, "Flour":true, "Oil":true, "Sliced Bread":true})
 
-  useEffect(() => {
-    async function startFetching() {
-      // Retrieving data from SessionStorage
-      const UserID = sessionStorage.getItem('UserID');
-
-      const userRef = doc(db, "users", UserID);
-      const profileRef = doc(userRef,"ingredients", "Basics")
-
-      const docSnap = await getDoc(profileRef);
-
-      if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
-
-        if (!ignore) {
-          setInitial(docSnap.data());
-        }
-      } else {
-        // docSnap.data() will be undefined in this case
-        console.log("No such document!");
-      }
-    }
-
-    let ignore = false;
-    startFetching();
-    return () => {
-      ignore = true;
-    }
-  }, []);
-
   const handleImageClick = (accordionName) => {
     setActiveAccordion(accordionName);
   };
@@ -184,7 +155,6 @@ function Cabinet() {
                               </Typography>
                             </Grid>
                           </Grid>
-                            
 
                         }) 
                         }
@@ -198,12 +168,7 @@ function Cabinet() {
                       </button>
 
                     </div>
-                    
-                    
-                    {/*<DialogCloseButton className="IconButton" onClick={() => {
-                        handleClose();
-                      }}/>*/}
-                    </DialogContent>
+                  </DialogContent>
             </DialogPortal>}
           </Dialog>
         </div>
