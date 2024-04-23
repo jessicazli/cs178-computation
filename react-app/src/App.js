@@ -42,10 +42,6 @@ function App() {
                         element={<Cabinet />}
                     />
                     <Route
-                        path="/profile"
-                        element={<Profile />}
-                    />
-                    <Route
                         path="/recipe"
                         element={<Recipe />}
                     />
