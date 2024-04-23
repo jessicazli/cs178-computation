@@ -64,9 +64,8 @@ function SignUp() {
           
           // Storing data in SessionStorage
           sessionStorage.setItem("UserID", user.uid);
-
-          sessionStorage.setItem("firstTime", true);
-          navigate("/profile");
+          global.firstTime = true 
+          navigate("/cabinet");
         } catch (e) {
           alert("Error adding document: ", e);
       }

@@ -6,22 +6,31 @@ import { db } from '../config/Firebase';
 import { collection, addDoc, setDoc, doc, getDoc } from "firebase/firestore"; 
 import React, { useEffect, useState } from 'react';
 import CheckboxControlled from '../components/checkboxControlled';
-import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import { FaVihara } from "react-icons/fa";
 
 function Cabinet() {
 
   // TODO: have to figure out clicking on the images to open the correct accordion
 
   const [activeAccordion, setActiveAccordion] = useState(null);
-  //const [openEssentials, setOpenEssentials] = useState(sessionStorage.getItem("firstTime"));
-  const [openEssentials, setOpenEssentials] = useState(true); //for test
-  const [otherPref, setOtherPref] = useState("")
+  //const [openEssentials, setOpenEssentials] = useState(global.firstTime);
+  const [openEssentials, setOpenEssentials] = useState(false); //for test
   const [changedEssentials, setChangedEssentials] = useState([])
   const essentials = ["Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread"]
   const [initial, setInitial] = useState({"Sugar":true, "Salt":true, "Pepper":true, "Butter":true, "Flour":true, "Oil":true, "Sliced Bread":true})
+
+  useEffect(() => {
+    //var open = sessionStorage.getItem('firstTime');
+    var open = global.firstTime
+    if (open) {
+      setOpenEssentials(open)
+      global.firstTime = false
+    }
+    
+  }, [])
 
   const handleImageClick = (accordionName) => {
     setActiveAccordion(accordionName);
@@ -116,7 +125,6 @@ function Cabinet() {
 
           {/* Essentials dialog */}
           <Dialog open = {openEssentials} onOpenChange={setOpenEssentials}>
-            {openEssentials === true && 
               <DialogPortal>
                 <DialogOverlay className="DialogOverlayEssentials"/>
                 <DialogContent className="DialogContentEssentials"
@@ -163,13 +171,13 @@ function Cabinet() {
                     </Box>
                     <div style={{display:'flex', justifyContent: 'center'}}>
                       <button type="button" class="btn btn-success" 
-                        onClick={() => {handleSubmit(); alert("Submitted!");handleClose();}}>
+                        onClick={() => {handleSubmit();handleClose();}}>
                         submit preferences!
                       </button>
 
                     </div>
                   </DialogContent>
-            </DialogPortal>}
+            </DialogPortal>
           </Dialog>
         </div>
       </div>
