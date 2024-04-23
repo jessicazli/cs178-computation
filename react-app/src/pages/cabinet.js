@@ -148,7 +148,10 @@ function Cabinet() {
             {openEssentials === true && 
               <DialogPortal>
                 <DialogOverlay className="DialogOverlayEssentials"/>
-                <DialogContent className="DialogContentEssentials">
+                <DialogContent className="DialogContentEssentials"
+                  onPointerDownOutside={(e) => e.preventDefault()}
+                  onInteractOutside={(e) => e.preventDefault()}
+                >
                     {/* add content here */}
                     <DialogTitle className="DialogTitleEssentials">Essential Ingredients</DialogTitle>
                     <Typography variant="body2" gutterBottom>
