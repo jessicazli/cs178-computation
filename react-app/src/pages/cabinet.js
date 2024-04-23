@@ -161,37 +161,42 @@ function Cabinet() {
                      to this list with the 'add grocery haul' button in Your Pantry. 
                     </Typography>
 
-                    <Box sx={{ width: '50%', m: '2rem'}}>
-                      
+                    <Box sx={{ width: '100%', m: '2rem', display: 'flex', flexDirection: 'row', overflow: 'auto'}}>
+                      <Grid container sx={{ flexGrow: 1, minWidth:'20%' }} justifyContent="flex-start" alignContent="flex-start">
                         { essentials.map(function(item, i){
-                          return <Grid container sx={{ flexGrow: 1 }} justifyContent="flex-start" alignContent="flex-start">
-                              <Grid item xs={2}>
-                                <CheckboxControlled 
-                                  className={item}
-                                  checked={initial[item]}
-                                  onCheckedChange = {(event) => {
-                                    changeInitial(item, event);changedEssentials.push([event, i]);
-                                  }}
-                                />
-                              </Grid>
-                                
-                              <Grid item xs={10} >
-                                <Typography variant="subtitle1" gutterBottom>
-                                  {item}
-                                </Typography>
-                              </Grid>
+                          return <Grid item xs={4} sx={{display: 'flex', flexDirection: 'row'}}>
+                            <Grid item xs={3}>
+                              <CheckboxControlled 
+                                className={item}
+                                checked={initial[item]}
+                                onCheckedChange = {(event) => {
+                                  changeInitial(item, event);changedEssentials.push([event, i]);
+                                }}
+                              />
                             </Grid>
+                                
+                            <Grid item xs={9} >
+                              <Typography variant="subtitle1" gutterBottom>
+                                {item}
+                              </Typography>
+                            </Grid>
+                          </Grid>
+                            
 
                         }) 
                         }
+                      </Grid>
                       
                     </Box>
-                    <Button variant="outlined"
-                            onClick={() => {
-                              handleSubmit(); alert("Submitted!");handleClose();
-                            }}>
-                        Submit Preferences!
-                    </Button>
+                    <div style={{display:'flex', justifyContent: 'center'}}>
+                      <button type="button" class="btn btn-success" 
+                        onClick={() => {handleSubmit(); alert("Submitted!");handleClose();}}>
+                        submit preferences!
+                      </button>
+
+                    </div>
+                    
+                    
                     {/*<DialogCloseButton className="IconButton" onClick={() => {
                         handleClose();
                       }}/>*/}
