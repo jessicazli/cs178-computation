@@ -16,14 +16,12 @@ function Cabinet() {
   // TODO: have to figure out clicking on the images to open the correct accordion
 
   const [activeAccordion, setActiveAccordion] = useState(null);
-  //const [openEssentials, setOpenEssentials] = useState(global.firstTime);
-  const [openEssentials, setOpenEssentials] = useState(false); //for test
+  const [openEssentials, setOpenEssentials] = useState(false);
   const [changedEssentials, setChangedEssentials] = useState([])
   const essentials = ["Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread"]
   const [initial, setInitial] = useState({"Sugar":true, "Salt":true, "Pepper":true, "Butter":true, "Flour":true, "Oil":true, "Sliced Bread":true})
 
   useEffect(() => {
-    //var open = sessionStorage.getItem('firstTime');
     var open = global.firstTime
     if (open) {
       setOpenEssentials(open)
@@ -131,7 +129,6 @@ function Cabinet() {
                   onPointerDownOutside={(e) => e.preventDefault()}
                   onInteractOutside={(e) => e.preventDefault()}
                 >
-                    {/* add content here */}
                     <DialogTitle className="DialogTitleEssentials">Essential Ingredients</DialogTitle>
                     <Typography variant="body2" gutterBottom>
                      Unselect any ingredients you don't have and click the Submit Preferences button!
