@@ -1,4 +1,5 @@
 import { Dialog, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogCloseButton } from "../components/dialog";
+import {DialogTitle} from '@radix-ui/react-dialog';
 import FoodList from "../components/foodList";
 import AddGroceries from "../components/addGroceries";
 import { db } from '../config/Firebase';
@@ -19,7 +20,7 @@ function Cabinet() {
   const [openEssentials, setOpenEssentials] = useState(true); //for test
   const [otherPref, setOtherPref] = useState("")
   const [changedEssentials, setChangedEssentials] = useState([])
-  const essentials = ["Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread", "Beef", "Rice", "Chicken", "Noodles", "Carrots", "Potatoes"]
+  const essentials = ["Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread"]
   const [initial, setInitial] = useState({"Sugar":true, "Salt":true, "Pepper":true, "Butter":true, "Flour":true, "Oil":true, "Sliced Bread":true})
 
   useEffect(() => {
@@ -146,22 +147,18 @@ function Cabinet() {
           <Dialog open = {openEssentials} onOpenChange={setOpenEssentials}>
             {openEssentials === true && 
               <DialogPortal>
-                <DialogOverlay className="DialogOverlay"/>
-                <DialogContent className="DialogContent">
+                <DialogOverlay className="DialogOverlayEssentials"/>
+                <DialogContent className="DialogContentEssentials">
                     {/* add content here */}
-                    <Typography variant="subtitle1" gutterBottom>
-                      Essential Ingredients
+                    <DialogTitle className="DialogTitleEssentials">Essential Ingredients</DialogTitle>
+                    <Typography variant="body2" gutterBottom>
+                     Unselect any ingredients you don't have and click the Submit Preferences button!
+                     This 'Essential Ingredients' category is for the ingredients you'll have in 
+                     your pantry most of the time and won't have to add or remove often. 
                     </Typography>
                     <Typography variant="body2" gutterBottom>
-                     Unselect any ingredients you don't have and click the Submit Preferences button! \t
-                     This 'Essential Ingredients' category is for the ingredients you'll have in 
-                     your pantry most of the time, and won't have to add or remove items in this
-                     category often. This pop up will only appear this time as you \n
-                     are a first time user, but later on, you can \n 
-                     add or remove these ingredients in your pantry page.
-                     
-                     We've suggested some 'essential ingredients' below, but you can definitely add more
-                     to this list with the 'add grocery haul' button in Your Pantry.
+                      We've suggested some 'essential ingredients' below, but you can definitely add more
+                     to this list with the 'add grocery haul' button in Your Pantry. 
                     </Typography>
 
                     <Box sx={{ width: '50%', m: '2rem'}}>
