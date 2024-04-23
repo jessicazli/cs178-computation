@@ -73,7 +73,7 @@ function Recipe() {
               but you cannot use any ingredients outside of this list.
               Please give amounts for the ingredients as well such as 2 eggs or 1 cup of flour. 
               Serving size is ${servingSize} people and dietary restrictions are ${dietaryRestrictions}. 
-              The difficulty level should be ${difficulty}. 
+              The difficulty level should be for ${difficulty} and the maximum cooking time for the recipe is ${cookingTimeInput} minutes. 
               Return JSON with the dish_name, cooking_time, ingredients_list 
               (in an array), and the recipe of course. 
               Do not use newline or slash characters except for inside the recipe string.`,
@@ -174,9 +174,9 @@ function Recipe() {
               onChange={(e) => setDifficulty(e.target.value)}
             >
               <option value="">Select</option>
-              <option value="Easy">Easy</option>
-              <option value="Medium">Medium</option>
-              <option value="Hard">Hard</option>
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
             </select>
           </div>
         </div>
