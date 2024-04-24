@@ -6,7 +6,6 @@ import { db } from '../config/Firebase';
 import { setDoc, doc, getDoc } from "firebase/firestore"; 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { grid } from 'ldrs'
-import MultipleSelect from "../components/multiSelect";
 import * as React from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -211,42 +210,32 @@ function Recipe() {
             </select>
           </div>
         </div>
-        <div className="mb-3">
+        <div className="row mb-3">
+          <div className="col-sm-6">
           
-          <FormControl sx={{ m: 1, width: 300 }}>
-          <InputLabel id="demo-multiple-name-label">Dietary Restrictions</InputLabel>
-          <Select
-            labelId="demo-multiple-name-label"
-            id="demo-multiple-name"
-            multiple
-            value={itemNames}
-            onChange={handleChange}
-            input={<OutlinedInput label="Name"/>}
-            MenuProps={MenuProps}
-          >
-            {dietaryPrefList.map((item) => (
-              <MenuItem
-                key={item}
-                value={item}
-              >
-                {item}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-          {/*<label htmlFor="dietaryRestrictions" className="form-label">Dietary Restrictions:</label>
-          <select
-            id="dietaryRestrictions"
-            className="form-select"
-            value={dietaryRestrictions}
-            onChange={(e) => setDietaryRestrictions(e.target.value)}
-          >
-            <option value="">None</option>
-            <option value="Vegetarian">Vegetarian</option>
-            <option value="Vegan">Vegan</option>
-            <option value="Gluten-free">Gluten-free</option>
-            <option value="Dairy-free">Dairy-free</option>
-          </select> */}
+          <label htmlFor="dietaryRestrictions" className="form-label">Dietary Restrictions:</label>
+            <Select
+              labelId="dietaryRestrictions"
+              className="form-select"
+              id="dietaryRestrictions"
+              multiple
+              value={itemNames}
+              onChange={handleChange}
+              input={<OutlinedInput label="Name"/>}
+              IconComponent	= {null}
+              MenuProps={MenuProps}
+              sx={{ maxHeight: '40px' }}
+            >
+              {dietaryPrefList.map((item) => (
+                <MenuItem
+                  key={item}
+                  value={item}
+                >
+                  {item}
+                </MenuItem>
+              ))}
+            </Select>
+          </div>
         </div>
         <div className="text-center">
           <button type="submit" className="btn btn-success">Generate Recipe</button>
