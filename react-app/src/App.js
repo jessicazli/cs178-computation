@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 import SignUp from "./pages/signup";
 import Login from "./pages/login";
-import Profile from "./pages/profile";
 import Cabinet from "./pages/cabinet";
 import Recipe from "./pages/recipe";
  

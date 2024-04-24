@@ -6,11 +6,26 @@ import { db } from '../config/Firebase';
 import { setDoc, doc, getDoc } from "firebase/firestore"; 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { grid } from 'ldrs'
+import * as React from 'react';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 grid.register()
 
 const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
 const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 function Recipe() {
     const [result, setResult] = useState(null);
@@ -21,8 +36,23 @@ function Recipe() {
     const [mealType, setMealType] = useState("");
     const [difficulty, setDifficulty] = useState("");
     const [cookingTimeInput, setCookingTimeInput] = useState("");
+    const [cuisine, setCuisine] = useState("");
+    const [otherPrefs, setOtherPrefs] = useState("");
     const [dish_name, setDishName] = useState("");
     const [initial, setInitial] = useState(null);
+
+    const [itemNames, setItemNames] = React.useState([]);
+  
+    const handleChange = (event) => {
+      const {
+        target: { value },
+      } = event;
+      setItemNames(
+        // On autofill we get a stringified value.
+        typeof value === 'string' ? value.split(',') : value,
+      );
+    };
+    const dietaryPrefList = ['Vegetarian', 'Vegan', 'Gluten-Free', 'Dairy-Free']
 
     useEffect(() => {
         startFetching();
@@ -68,12 +98,13 @@ function Recipe() {
         const messages = [
             {
               role: "user",
-              content: `Give me a ${mealType} recipe using only these ingredients: ${cabinet}. 
+              content: `Give me a ${mealType}, ${cuisine} recipe using only these ingredients: ${cabinet}. 
               You don't have to use all of these ingredients for the recipe, 
               but you cannot use any ingredients outside of this list.
               Please give amounts for the ingredients as well such as 2 eggs or 1 cup of flour. 
               Serving size is ${servingSize} people and dietary restrictions are ${dietaryRestrictions}. 
-              The difficulty level should be ${difficulty}. 
+              The difficulty level should be for ${difficulty} and the maximum cooking time for the recipe is ${cookingTimeInput} minutes. 
+              Also take into account these other preferences: ${otherPrefs}.
               Return JSON with the dish_name, cooking_time, ingredients_list 
               (in an array), and the recipe of course. 
               Do not use newline or slash characters except for inside the recipe string.`,
@@ -174,26 +205,59 @@ function Recipe() {
               onChange={(e) => setDifficulty(e.target.value)}
             >
               <option value="">Select</option>
-              <option value="Easy">Easy</option>
-              <option value="Medium">Medium</option>
-              <option value="Hard">Hard</option>
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
             </select>
           </div>
         </div>
-        <div className="mb-3">
+        <div className="row mb-3">
+          <div className="col-sm-6">
+          
           <label htmlFor="dietaryRestrictions" className="form-label">Dietary Restrictions:</label>
-          <select
-            id="dietaryRestrictions"
-            className="form-select"
-            value={dietaryRestrictions}
-            onChange={(e) => setDietaryRestrictions(e.target.value)}
-          >
-            <option value="">None</option>
-            <option value="Vegetarian">Vegetarian</option>
-            <option value="Vegan">Vegan</option>
-            <option value="Gluten-free">Gluten-free</option>
-            <option value="Dairy-free">Dairy-free</option>
-          </select>
+            <Select
+              labelId="dietaryRestrictions"
+              className="form-select"
+              id="dietaryRestrictions"
+              multiple
+              value={itemNames}
+              onChange={handleChange}
+              input={<OutlinedInput label="Name"/>}
+              IconComponent	= {null}
+              MenuProps={MenuProps}
+              sx={{ maxHeight: '40px' }}
+            >
+              {dietaryPrefList.map((item) => (
+                <MenuItem
+                  key={item}
+                  value={item}
+                >
+                  {item}
+                </MenuItem>
+              ))}
+            </Select>
+          </div>
+          <div className="col-sm-6">
+            <label htmlFor="cuisine" className="form-label">Cuisine:</label>
+            <input
+              type="text"
+              id="cuisine"
+              className="form-control"
+              value={cuisine}
+              onChange={(e) => setCuisine(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="mb-3">
+          <label htmlFor="otherPrefs" className="form-label">Any other preferences?</label>
+          <input
+            type="text"
+            id="otherPrefs"
+            className="form-control"
+            placeholder="Enter any other preferences you have here e.g. an ingredient you want to use, dish type, etc."
+            value={otherPrefs}
+            onChange={(e) => setOtherPrefs(e.target.value)}
+          />
         </div>
         <div className="text-center">
           <button type="submit" className="btn btn-success">Generate Recipe</button>
