@@ -8,9 +8,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { grid } from 'ldrs'
 import * as React from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 grid.register()
@@ -38,6 +36,8 @@ function Recipe() {
     const [mealType, setMealType] = useState("");
     const [difficulty, setDifficulty] = useState("");
     const [cookingTimeInput, setCookingTimeInput] = useState("");
+    const [cuisine, setCuisine] = useState("");
+    const [otherPrefs, setOtherPrefs] = useState("");
     const [dish_name, setDishName] = useState("");
     const [initial, setInitial] = useState(null);
 
@@ -98,12 +98,13 @@ function Recipe() {
         const messages = [
             {
               role: "user",
-              content: `Give me a ${mealType} recipe using only these ingredients: ${cabinet}. 
+              content: `Give me a ${mealType}, ${cuisine} recipe using only these ingredients: ${cabinet}. 
               You don't have to use all of these ingredients for the recipe, 
               but you cannot use any ingredients outside of this list.
               Please give amounts for the ingredients as well such as 2 eggs or 1 cup of flour. 
               Serving size is ${servingSize} people and dietary restrictions are ${dietaryRestrictions}. 
               The difficulty level should be for ${difficulty} and the maximum cooking time for the recipe is ${cookingTimeInput} minutes. 
+              Also take into account these other preferences: ${otherPrefs}.
               Return JSON with the dish_name, cooking_time, ingredients_list 
               (in an array), and the recipe of course. 
               Do not use newline or slash characters except for inside the recipe string.`,
@@ -236,6 +237,27 @@ function Recipe() {
               ))}
             </Select>
           </div>
+          <div className="col-sm-6">
+            <label htmlFor="cuisine" className="form-label">Cuisine:</label>
+            <input
+              type="text"
+              id="cuisine"
+              className="form-control"
+              value={cuisine}
+              onChange={(e) => setCuisine(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="mb-3">
+          <label htmlFor="otherPrefs" className="form-label">Any other preferences?</label>
+          <input
+            type="text"
+            id="otherPrefs"
+            className="form-control"
+            placeholder="Enter any other preferences you have here e.g. an ingredient you want to use, dish type, etc."
+            value={otherPrefs}
+            onChange={(e) => setOtherPrefs(e.target.value)}
+          />
         </div>
         <div className="text-center">
           <button type="submit" className="btn btn-success">Generate Recipe</button>
