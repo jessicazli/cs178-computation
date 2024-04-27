@@ -16,7 +16,9 @@ function Saved() {
 
     useEffect(() => {
         async function startFetching() {
-          const userDocRef = doc(db, "users", global.UserID);
+          // Retrieving data from SessionStorage
+          const UserID = sessionStorage.getItem('UserID');
+          const userDocRef = doc(db, "users", UserID);
           //const profileRef = doc(userDocRef,"ingredients", "All")
 
 
@@ -44,6 +46,7 @@ function Saved() {
 
   const items = savedRecipes.map((recipe, index) => (
     <div className="card recipe-boxes">
+        <div className="note">
         <div className="card-header">
         <div className="">
             <h3 className="card-title" style={{fontWeight: "bold"}}>{recipe.dish_name}</h3>
@@ -72,15 +75,19 @@ function Saved() {
             <strong>Instructions:</strong>
             <pre>{recipe.recipe}</pre>
         </p>
+        <img src="/images/pin.png" className="pushpin"></img>
         </div>
+    </div>
     </div>
   ));
 
   return (
     <div className="App">
+      <div className="tackboard">
       <Masonry columnsCount={3} gutter="0px">
         {items}
       </Masonry>
+      </div> 
     </div>
   );
 }

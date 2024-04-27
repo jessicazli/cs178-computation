@@ -74,15 +74,16 @@ function Recipe() {
               Please give amounts for the ingredients as well such as 2 eggs or 1 cup of flour. 
               Serving size is ${servingSize} people and dietary restrictions are ${dietaryRestrictions}. 
               The difficulty level should be ${difficulty}. 
+              The maximum cooking time is ${cookingTimeInput} minutes.
               Return JSON with the dish_name, cooking_time, ingredients_list 
-              (in an array), and the recipe of course. 
+              (in an array), and the steps of the recipe. 
               Do not use newline or slash characters except for inside the recipe string.`,
             },
         ];
 
         const completion = await openai.chat.completions.create({
         messages: messages,
-        model: "gpt-3.5-turbo",
+        model: "gpt-4-turbo",
         response_format:{ "type": "json_object" },
         });
 
