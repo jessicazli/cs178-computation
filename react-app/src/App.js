@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 import SignUp from "./pages/signup";
 import Login from "./pages/login";
-import Profile from "./pages/profile";
 import Cabinet from "./pages/cabinet";
 import Recipe from "./pages/recipe";
 import Saved from "./pages/saved";
@@ -43,6 +42,7 @@ function App() {
                         element={<Cabinet />}
                     />
                     <Route
+<<<<<<< HEAD
                         path="/profile"
                         element={<Profile />}
                     />
@@ -51,6 +51,8 @@ function App() {
                         element={<Saved />}
                     />
                     <Route
+=======
+>>>>>>> e4a65b675f2214c92da368ab700cb8c285272028
                         path="/recipe"
                         element={<Recipe />}
                     />

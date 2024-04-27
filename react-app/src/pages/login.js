@@ -22,6 +22,7 @@ function Login() {
         const user = userCredential.user; //save as global constant (so know where to access database)
         // Storing data in SessionStorage
         sessionStorage.setItem("UserID", user.uid);
+        sessionStorage.setItem("firstTime", false);
         
         // Redirect to another page
         navigate("/cabinet");

@@ -18,9 +18,6 @@ const Navbar = () => {
                     <NavLink to="/saved" activeStyle>
                         My Cookbook
                     </NavLink>
-                    <NavLink to="/profile" activeStyle>
-                        Profile
-                    </NavLink>
                 </NavMenu>
             </Nav>
         </>

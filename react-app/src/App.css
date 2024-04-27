@@ -70,21 +70,6 @@ h3 {
   overflow: hidden;
 }
 
-.AccordionInfo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: white;
-  font-family: inherit;
-  padding: 10px 20px;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 15px;
-  line-height: 1;
-}
-
 .sticky-line {
   position: -webkit-sticky;
   position: sticky;
@@ -117,7 +102,7 @@ h3 {
 .AccordionTrigger {
   font-family: inherit;
   background-color: transparent;
-  padding: 10px 20px;
+  padding: 20px 40px;
   flex: 1;
   display: flex;
   align-items: center;
@@ -126,7 +111,6 @@ h3 {
   line-height: 1;
   color: black;
   background-color: white;
-  pointer-events: none !important;
 }
 
 .AccordionContent {
@@ -182,6 +166,11 @@ h3 {
 /* food list */
 .food-list {
   padding: 40px;
+}
+
+.trash-icon:hover {
+  color: red;
+  cursor: pointer;
 }
 
 /* checkbox */
@@ -271,6 +260,41 @@ h3 {
   }
 }
 
+/* dialog essentials */
+
+.DialogOverlayEssentials{
+  background-color: var(--black-a9);
+  position: fixed;
+  inset: 0;
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.DialogContentEssentials {
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 600px;
+  max-height: 85vh;
+  padding: 25px;
+  height: 50vh;
+  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.DialogContentEssentials:focus {
+  outline: none;
+}
+
+.DialogTitleEssentials {
+  margin: 0;
+  font-weight: 500;
+  color: var(--mauve-12);
+  font-size: 20px;
+}
+
 /* add groceries */
 .title {
   font-weight: bold;
@@ -344,87 +368,72 @@ h3 {
   position: relative;
 }
 
-.shelves {
-  padding-top: 20px;
+.shelf {
+  padding-top: 30px;
+  width: 64%;
 }
 
-.eggs {
-  width: 80px;
+.proteins {
+  height: 40px;
   position: absolute;
-  top: 135px ; 
+  top: 77px; 
+  left: 210px;
+  z-index: 10;
+}
+
+.vegetables {
+  height: 40px;
+  position: absolute;
+  top: 77px; 
+  left: 390px;
+  z-index: 10;
+}
+
+.fruits {
+  height: 40px;
+  position: absolute;
+  top: 225px; 
   left: 190px;
   z-index: 10;
 }
 
-.meatloaf {
-  width: 80px;
+.dairy {
+  height: 40px;
   position: absolute;
-  top: 140px ; 
-  left: 280px;
+  top: 225px; 
+  left: 320px;
   z-index: 10;
 }
 
-.vegetable {
-  width: 90px;
+.grains {
+  height: 40px;
   position: absolute;
-  top: 135px ; 
-  left: 430px;
-  z-index: 10;
-}
-
-.fruit {
-  width: 80px;
-  position: absolute;
-  top: 265px ; 
-  left: 270px;
-  z-index: 10;
-}
-
-.milk {
-  width: 70px;
-  position: absolute;
-  top: 265px ; 
-  left: 400px;
-  z-index: 10;
-}
-
-.rice {
-  width: 70px;
-  position: absolute;
-  top: 410px ; 
-  left: 240px;
-  z-index: 5;
-}
-
-.pasta {
-  width: 70px;
-  position: absolute;
-  top: 410px ; 
-  left: 180px;
-  z-index: 10;
-}
-
-.bread {
-  width: 70px;
-  position: absolute;
-  top: 410px ; 
-  left: 350px;
-  z-index: 10;
-}
-
-.honey {
-  width: 70px;
-  position: absolute;
-  top: 400px ; 
+  top: 225px; 
   left: 450px;
   z-index: 10;
 }
 
-.eggs, .meatloaf, .vegetable, .fruit, .milk, .pasta, .rice, .bread, .honey {
+.essentials {
+  height: 40px;
+  position: absolute;
+  top: 374px; 
+  left: 220px;
+  z-index: 10;
+}
+
+.other {
+  height: 40px;
+  position: absolute;
+  top: 374px; 
+  left: 430px;
+  z-index: 10;
+}
+
+.proteins, .vegetables, .fruits, .dairy, .grains, .essentials, .other {
   transition: transform 0.3s ease-in-out;
   cursor: pointer;
 }
-.eggs:hover, .meatloaf:hover, .vegetable:hover, .fruit:hover, .milk:hover, .pasta:hover, .rice:hover, .bread:hover, .honey:hover {
+.proteins:hover, .vegetables:hover, .fruits:hover, .dairy:hover, .grains:hover, .essentials:hover, .other:hover {
   transform: scale(1.1);
 }
 

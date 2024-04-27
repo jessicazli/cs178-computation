@@ -15,15 +15,12 @@ function Profile() {
 
   const [otherPref, setOtherPref] = useState("")
   const [changedEssentials, setChangedEssentials] = useState([])
-  const essentials = ["Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread"]
+  const essentials = ["Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread", "Beef", "Rice", "Chicken", "Noodles", "Carrots", "Potatoes"]
   const [initial, setInitial] = useState({"Sugar":true, "Salt":true, "Pepper":true, "Butter":true, "Flour":true, "Oil":true, "Sliced Bread":true})
 
   useEffect(() => {
     async function startFetching() {
-      // Retrieving data from SessionStorage
-      const UserID = sessionStorage.getItem('UserID');
-
-      const userRef = doc(db, "users", UserID);
+      const userRef = doc(db, "users", global.UserID);
       const profileRef = doc(userRef,"ingredients", "Basics")
 
       const docSnap = await getDoc(profileRef);
@@ -57,10 +54,7 @@ function Profile() {
     //saves preferences (for now is the list of basic ingredients)
     
     try {
-      // Retrieving data from SessionStorage
-      const UserID = sessionStorage.getItem('UserID');
-
-      const userRef = doc(db, "users", UserID);
+      const userRef = doc(db, "users", global.UserID);
       const profileRef = doc(userRef,"ingredients", "All")
       var obj = {} //List ingredients here, false means does not have, true means have
       obj[essentials[index]] = hasIngred
@@ -71,10 +65,8 @@ function Profile() {
     }
 
     try {
-      // Retrieving data from SessionStorage
-      const UserID = sessionStorage.getItem('UserID');
       // Add a new document in collection "cities"
-      const userRef = doc(db, "users", UserID);
+      const userRef = doc(db, "users", global.UserID);
       const profileRef = doc(userRef,"ingredients", "Basics")
       var obj = {} //List ingredients here, false means does not have, true means have
       obj[essentials[index]] = hasIngred
