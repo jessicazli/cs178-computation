@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { TrashIcon } from "@radix-ui/react-icons";
 
-function FoodList({ activeAccordion }) {
+function FoodList({ activeAccordion, setValue }) {
     console.log('active:' + activeAccordion);
 
     const categories = ["Proteins", "Vegetables", "Fruits", "Dairy", "Grains", "Basics", "Other"];
@@ -70,10 +70,14 @@ function FoodList({ activeAccordion }) {
     };
     const renderContent = (category) => {
         const items = state[category.toLowerCase()];
-        if (!items || Object.keys(items).length === 0) {
-            return "Add items to your pantry!";
+
+        const filteredItems = items ? Object.keys(items).filter(key => items[key] === true) : [];
+
+        if (!filteredItems.length) {
+            return <div className="empty-message">Add items to your pantry!</div>;
         }
-        return Object.keys(items).filter(key => items[key]).map((key) => ( 
+
+        return filteredItems.map((key) => (
             <div className="AccordionInfo2" key={key}>
                 <div>{key}</div>
                 <TrashIcon className="trash-icon" onClick={() => deleteItem(key, category)}/>
@@ -83,7 +87,7 @@ function FoodList({ activeAccordion }) {
 
     return (
         <div className="food-list"> 
-            <Accordion className="AccordionRoot" type="single">
+            <Accordion className="AccordionRoot" type="single" value={activeAccordion} onValueChange={setValue}>
                 {categories.map((category) => (
                     <AccordionItem key={category} value={category.toLowerCase()} data-state={activeAccordion === category.toLowerCase() ? 'open' : 'closed'}>
                         <AccordionTrigger className="sticky-line">
