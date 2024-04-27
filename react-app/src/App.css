@@ -168,6 +168,11 @@ h3 {
   padding: 40px;
 }
 
+.trash-icon:hover {
+  color: red;
+  cursor: pointer;
+}
+
 /* checkbox */
 .CheckboxRoot {
   background-color: white;
@@ -327,87 +332,72 @@ h3 {
   position: relative;
 }
 
-.shelves {
-  padding-top: 20px;
+.shelf {
+  padding-top: 30px;
+  width: 64%;
 }
 
-.eggs {
-  width: 80px;
+.proteins {
+  height: 40px;
   position: absolute;
-  top: 135px ; 
+  top: 77px; 
+  left: 210px;
+  z-index: 10;
+}
+
+.vegetables {
+  height: 40px;
+  position: absolute;
+  top: 77px; 
+  left: 390px;
+  z-index: 10;
+}
+
+.fruits {
+  height: 40px;
+  position: absolute;
+  top: 225px; 
   left: 190px;
   z-index: 10;
 }
 
-.meatloaf {
-  width: 80px;
+.dairy {
+  height: 40px;
   position: absolute;
-  top: 140px ; 
-  left: 280px;
+  top: 225px; 
+  left: 320px;
   z-index: 10;
 }
 
-.vegetable {
-  width: 90px;
+.grains {
+  height: 40px;
   position: absolute;
-  top: 135px ; 
-  left: 430px;
-  z-index: 10;
-}
-
-.fruit {
-  width: 80px;
-  position: absolute;
-  top: 265px ; 
-  left: 270px;
-  z-index: 10;
-}
-
-.milk {
-  width: 70px;
-  position: absolute;
-  top: 265px ; 
-  left: 400px;
-  z-index: 10;
-}
-
-.rice {
-  width: 70px;
-  position: absolute;
-  top: 410px ; 
-  left: 240px;
-  z-index: 5;
-}
-
-.pasta {
-  width: 70px;
-  position: absolute;
-  top: 410px ; 
-  left: 180px;
-  z-index: 10;
-}
-
-.bread {
-  width: 70px;
-  position: absolute;
-  top: 410px ; 
-  left: 350px;
-  z-index: 10;
-}
-
-.honey {
-  width: 70px;
-  position: absolute;
-  top: 400px ; 
+  top: 225px; 
   left: 450px;
   z-index: 10;
 }
 
-.eggs, .meatloaf, .vegetable, .fruit, .milk, .pasta, .rice, .bread, .honey {
+.essentials {
+  height: 40px;
+  position: absolute;
+  top: 374px; 
+  left: 220px;
+  z-index: 10;
+}
+
+.other {
+  height: 40px;
+  position: absolute;
+  top: 374px; 
+  left: 430px;
+  z-index: 10;
+}
+
+.proteins, .vegetables, .fruits, .dairy, .grains, .essentials, .other {
   transition: transform 0.3s ease-in-out;
   cursor: pointer;
 }
-.eggs:hover, .meatloaf:hover, .vegetable:hover, .fruit:hover, .milk:hover, .pasta:hover, .rice:hover, .bread:hover, .honey:hover {
+.proteins:hover, .vegetables:hover, .fruits:hover, .dairy:hover, .grains:hover, .essentials:hover, .other:hover {
   transform: scale(1.1);
 }
 

@@ -90,7 +90,15 @@ function Cabinet() {
       <div className="row">
         <div className="col-6 text-center">
           <div className="images">
-            <img src="/images/shelves.png" alt="shelves" className="shelves"/>
+            <img src="/images/Shelf.svg" alt="shelf" className="shelf"/>
+            <img src="/images/Proteins.svg" alt="proteins" className="proteins"/>
+            <img src="/images/Vegetables.svg" alt="vegetables" className="vegetables"/>
+            <img src="/images/Fruits.svg" alt="fruits" className="fruits"/>
+            <img src="/images/Dairy.svg" alt="dairy" className="dairy"/>
+            <img src="/images/Grains.svg" alt="grains" className="grains"/>
+            <img src="/images/Essentials.svg" alt="essentials" className="essentials"/>
+            <img src="/images/Other.svg" alt="other" className="other"/>
+            {/* <img src="/images/shelves.png" alt="shelves" className="shelves"/>
             <div className="proteins" onClick={() => handleImageClick('proteins')}>
               <img src="/images/eggs.png" alt="eggs" className="eggs"/>
               <img src="/images/meatloaf.png" alt="meatloaf" className="meatloaf"/>
@@ -103,7 +111,7 @@ function Cabinet() {
               <img src="/images/rice.png" alt="rice" className="rice"/>
             </div>
             <img src="/images/bread.png" alt="bread" className="bread" onClick={() => handleImageClick('essentials')}/>
-            <img src="/images/honey.png" alt="honey" className="honey" onClick={() => handleImageClick('other')}/>
+            <img src="/images/honey.png" alt="honey" className="honey" onClick={() => handleImageClick('other')}/> */}
           </div>
         </div>
         <div className="col-6 text-center">
