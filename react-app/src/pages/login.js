@@ -1,6 +1,6 @@
 import '../App.css';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from '../config/Firebase';
+import { auth } from '../config/Firebase';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
@@ -32,11 +32,8 @@ function Login() {
         const errorMessage = error.message;
         alert(errorMessage)
     });
-    
   }
-    
   
-
   return (
     <div className="SignUp">
       <header className="Signup-header">

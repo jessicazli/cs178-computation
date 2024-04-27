@@ -40,6 +40,7 @@ export const Bars = styled(FaBars)`
  
 export const NavMenu = styled.div`
     display: flex;
+    justify-content: space-evenly;
     align-items: center;
     margin-right: -24px;
     /* Second Nav */
