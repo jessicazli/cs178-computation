@@ -91,11 +91,15 @@ function SignUp() {
       <img  src={logo} height={200} className="App-logo" alt="logo"/>
 
       <header className="Signup-header">
-        <p>
-          Sign Up!
-        </p>
+
         <Typography variant="h6" gutterBottom>
-          Please enter your email and password (at least 6 characters) below to sign up
+          Feeling lazy? Don’t want to go shopping? Don’t know what to make?
+        </Typography>
+        <Typography variant="h6" gutterBottom>
+          Sign up for Make My Menu to generate a variety of customizable 
+          recipes based on the ingredients you have in your home! Simply add 
+          your food items to your virtual ‘Pantry’, customize your preferences, 
+          and click ‘generate’!
         </Typography>
         
         <TextField
@@ -103,6 +107,7 @@ function SignUp() {
           id="outlined-required"
           label="Email"
           margin="dense" 
+          style={{width:'35%'}}
           onChange={(event) => {
             setEmail(event.target.value);
           }}
@@ -113,17 +118,20 @@ function SignUp() {
           label="Password"
           type="password"
           margin="dense" 
+          style={{width:'35%'}}
           autoComplete="current-password"
           onChange={(event) => {
             setPassword(event.target.value);
           }}
         />
-        <Button variant="outlined" margin="dense"
-                onClick={() => {
-                  handleSignUp();
-                }}>
-            Sign Up!
-        </Button>
+        <div style={{padding:'2%'}}>
+          <Button variant="outlined" margin="dense"
+                  onClick={() => {
+                    handleSignUp();
+                  }}>
+              Sign Up!
+          </Button>
+        </div>
       </header>
     </div>
   );

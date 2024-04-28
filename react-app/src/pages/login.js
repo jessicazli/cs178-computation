@@ -38,18 +38,14 @@ function Login() {
   return (
     <div className="SignUp">
       <img  src={logo} height={200} className="App-logo" alt="logo"/>
-      <header className="Signup-header">
-        
-
-        <Typography variant="h6" gutterBottom>
-          Please enter your email and password to login
-        </Typography>
+      <header className="Login-header">
         
         <TextField
           required
           id="outlined-required"
           label="Email"
           margin="dense"
+          style={{width:'35%'}}
           onChange={(event) => {
             setEmail(event.target.value);
           }}
@@ -60,17 +56,21 @@ function Login() {
           label="Password"
           type="password"
           margin="dense"
+          style={{width:'35%'}}
           autoComplete="current-password"
           onChange={(event) => {
             setPassword(event.target.value);
           }}
         />
-        <Button variant="outlined"
-                onClick={() => {
-                  handleLogin();
-                }}>
-            Login!
-        </Button>
+        <div style={{padding:'2%'}}>
+          <Button variant="outlined"
+                  onClick={() => {
+                    handleLogin();
+                  }}>
+              Login!
+          </Button>
+        </div>
+        
         <Link href="/sign-up" variant="body1">
           {"Don't have an account? Sign up here!"}
         </Link>
