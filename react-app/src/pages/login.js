@@ -1,6 +1,7 @@
 import '../App.css';
+import logo from '../logo.png'
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from '../config/Firebase';
+import { auth } from '../config/Firebase';
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import TextField from '@mui/material/TextField';
@@ -32,26 +33,19 @@ function Login() {
         const errorMessage = error.message;
         alert(errorMessage)
     });
-    
   }
-    
   
-
   return (
     <div className="SignUp">
-      <header className="Signup-header">
-        <p>
-          Login
-        </p>
-        <Typography variant="h6" gutterBottom>
-          Please enter your email and password to login
-        </Typography>
+      <img  src={logo} height={200} className="App-logo" alt="logo"/>
+      <header className="Login-header">
         
         <TextField
           required
           id="outlined-required"
           label="Email"
           margin="dense"
+          style={{width:'35%'}}
           onChange={(event) => {
             setEmail(event.target.value);
           }}
@@ -62,17 +56,21 @@ function Login() {
           label="Password"
           type="password"
           margin="dense"
+          style={{width:'35%'}}
           autoComplete="current-password"
           onChange={(event) => {
             setPassword(event.target.value);
           }}
         />
-        <Button variant="outlined"
-                onClick={() => {
-                  handleLogin();
-                }}>
-            Login!
-        </Button>
+        <div style={{padding:'2%'}}>
+          <Button variant="outlined"
+                  onClick={() => {
+                    handleLogin();
+                  }}>
+              Login!
+          </Button>
+        </div>
+        
         <Link href="/sign-up" variant="body1">
           {"Don't have an account? Sign up here!"}
         </Link>
