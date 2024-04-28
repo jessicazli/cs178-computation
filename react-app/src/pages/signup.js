@@ -5,6 +5,7 @@ import { collection, addDoc, setDoc, doc } from "firebase/firestore";
 import React, { useRef, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Typography } from '@mui/material';
+import logo from '../logo.png'
 
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -87,6 +88,8 @@ function SignUp() {
 
   return (
     <div className="SignUp">
+      <img  src={logo} height={200} className="App-logo" alt="logo"/>
+
       <header className="Signup-header">
         <p>
           Sign Up!

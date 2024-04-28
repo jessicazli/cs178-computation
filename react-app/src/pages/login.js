@@ -1,5 +1,5 @@
 import '../App.css';
-import Logo from '../logo.png'
+import logo from '../logo.png'
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../config/Firebase';
 import React, { useState } from 'react';
@@ -37,11 +37,10 @@ function Login() {
   
   return (
     <div className="SignUp">
+      <img  src={logo} height={200} className="App-logo" alt="logo"/>
       <header className="Signup-header">
-        <img  src={Logo}/>
-        <p>
-          Login
-        </p>
+        
+
         <Typography variant="h6" gutterBottom>
           Please enter your email and password to login
         </Typography>

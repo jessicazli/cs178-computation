@@ -2,10 +2,11 @@
 // Filename - "./components/Navbar.js
  
 import React from "react";
-import { Nav, NavLink, NavMenu } from "./index";
+import { Nav, NavLink, NavMenu, Logo } from "./index";
 import { useNavigate } from "react-router-dom";
 import { auth } from '../../config/Firebase';
 import { signOut } from "firebase/auth";
+import logo from '../../logo.png'
 
 
 function Navbar() {
@@ -32,6 +33,9 @@ function Navbar() {
         <>
             <Nav>
                 <NavMenu>
+                    <Logo>
+                        <img src={logo} height={40} className="App-logo" alt="logo"/>
+                    </Logo>
                     <NavLink to="/cabinet" activeStyle>
                         My Pantry
                     </NavLink>
