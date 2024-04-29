@@ -59,44 +59,46 @@ function AddGroceries() {
                     <label htmlFor="category" className="form-label">Category</label>
                 </div>
             </div>
-            {groceryItems.map((item, index) => (
-                <div key={index} className="row mb-3">
-                    <div className="col-sm-6">
-                        <input
-                            type="text"
-                            id={`foodName-${index}`}
-                            className="form-control"
-                            placeholder="Enter food name"
-                            value={item.newFood}
-                            onChange={(e) => updateGroceryItem(index, 'newFood', e.target.value)}
-                        />
+            <div className="scrollable">
+                {groceryItems.map((item, index) => (
+                    <div key={index} className="row mb-3">
+                        <div className="col-sm-6">
+                            <input
+                                type="text"
+                                id={`foodName-${index}`}
+                                className="form-control"
+                                placeholder="Enter food name"
+                                value={item.newFood}
+                                onChange={(e) => updateGroceryItem(index, 'newFood', e.target.value)}
+                            />
+                        </div>
+                        <div className="col-sm-6">
+                            <select
+                                id={`category-${index}`}
+                                className="form-select"
+                                value={item.category}
+                                onChange={(e) => updateGroceryItem(index, 'category', e.target.value)}
+                            >
+                                <option value="">Select</option>
+                                <option value="Proteins">Proteins</option>
+                                <option value="Vegetables">Vegetables</option>
+                                <option value="Fruits">Fruits</option>
+                                <option value="Dairy">Dairy</option>
+                                <option value="Grains">Grains</option>
+                                <option value="Basics">Essentials</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
                     </div>
-                    <div className="col-sm-6">
-                        <select
-                            id={`category-${index}`}
-                            className="form-select"
-                            value={item.category}
-                            onChange={(e) => updateGroceryItem(index, 'category', e.target.value)}
-                        >
-                            <option value="">Select</option>
-                            <option value="Proteins">Proteins</option>
-                            <option value="Vegetables">Vegetables</option>
-                            <option value="Fruits">Fruits</option>
-                            <option value="Dairy">Dairy</option>
-                            <option value="Grains">Grains</option>
-                            <option value="Basics">Essentials</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                </div>
-            ))}
+                ))}
+            </div>
             <div className="d-flex justify-content-center"> 
                 <button onClick={addGroceryItem} className="plus">
                     <PlusIcon/>
                 </button>
             </div>
             <div className="d-flex justify-content-end"> 
-                <button type="button" className="btn btn-primary add-button" onClick={handleSave} disabled={isSaveDisabled}>Save All</button>
+                <button type="button" className="btn btn-primary add-button" onClick={handleSave} disabled={isSaveDisabled}>Save</button>
             </div>
         </div>
     );

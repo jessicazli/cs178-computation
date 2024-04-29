@@ -15,7 +15,7 @@
 /* sign up page */
 .SignUp {
   text-align: center;
-  padding-top: 2%;
+  padding-top: 6%;
 }
 
 .Signup-header {
@@ -337,8 +337,14 @@ h3 {
 }
 
 .add-button {
-  bottom: 20px;
-  right: 20px;
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+}
+
+.scrollable {
+  max-height: 260px;
+  overflow-y: auto;
 }
 
 /* recipe */
