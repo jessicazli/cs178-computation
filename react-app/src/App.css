@@ -15,15 +15,29 @@
 /* sign up page */
 .SignUp {
   text-align: center;
-  padding-top: 5%;
+  padding-top: 2%;
 }
 
 .Signup-header {
+  padding-top: 3%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+  padding-left: 25%;
+  padding-right: 25%;
+}
+
+/* login page */
+.Login-header {
+  padding-top: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  padding-left: 25%;
+  padding-right: 25%;
 }
 
 /* profile page */

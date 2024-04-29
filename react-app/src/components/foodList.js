@@ -51,10 +51,12 @@ function FoodList({ activeAccordion, setValue }) {
         
         const userRef = doc(db, "users", UserID);
         const categoryRef = doc(userRef, "ingredients", category); 
+        const allRef = doc(userRef, "ingredients", "All");
     
         try {
             // Update the document to set the item's value to false
             await setDoc(categoryRef, { [key]: false }, { merge: true });
+            await setDoc(allRef, { [key]: false }, { merge: true });
     
             // Update local state to re-render the component
             setState(prevState => {

@@ -37,9 +37,14 @@ export const Bars = styled(FaBars)`
         cursor: pointer;
     }
 `;
+
+export const Logo = styled.div`
+    margin-right: 30px;
+`;
  
 export const NavMenu = styled.div`
     display: flex;
+    justify-content: space-evenly;
     align-items: center;
     margin-right: -24px;
     /* Second Nav */
