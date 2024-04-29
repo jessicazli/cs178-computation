@@ -16,8 +16,8 @@ function Cabinet() {
   const [activeAccordion, setActiveAccordion] = useState("");
   const [openEssentials, setOpenEssentials] = useState(false);
   const [changedEssentials, setChangedEssentials] = useState([])
-  const essentials = ["Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread"]
-  const [initial, setInitial] = useState({"Sugar":true, "Salt":true, "Pepper":true, "Butter":true, "Flour":true, "Oil":true, "Sliced Bread":true})
+  const essentials = ["Eggs","Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread"]
+  const [initial, setInitial] = useState({"Eggs":true, "Sugar":true, "Salt":true, "Pepper":true, "Butter":true, "Flour":true, "Oil":true, "Sliced Bread":true})
 
   const handleAccordionChange = (category) => {
     const newValue = activeAccordion === category ? "" : category;
