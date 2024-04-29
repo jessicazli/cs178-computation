@@ -15,9 +15,12 @@ function AddGroceries() {
                 return;
             }
             const categoryRef = doc(db, "users", UserID, "ingredients", category);
+            const allRef = doc(db, "users", UserID, "ingredients", "All");
 
             try {
                 await setDoc(categoryRef, { [newFood]: true }, { merge: true });
+                await setDoc(allRef, { [newFood]: true }, { merge: true });
+
                 console.log("New food added successfully.");
                 window.location.reload();
             } catch (error) {
