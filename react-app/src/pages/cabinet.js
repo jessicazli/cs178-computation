@@ -13,13 +13,16 @@ import { FaVihara } from "react-icons/fa";
 
 function Cabinet() {
 
-  // TODO: have to figure out clicking on the images to open the correct accordion
-
   const [activeAccordion, setActiveAccordion] = useState("");
   const [openEssentials, setOpenEssentials] = useState(false);
   const [changedEssentials, setChangedEssentials] = useState([])
   const essentials = ["Sugar", "Salt", "Pepper", "Butter", "Flour", "Oil", "Sliced Bread"]
   const [initial, setInitial] = useState({"Sugar":true, "Salt":true, "Pepper":true, "Butter":true, "Flour":true, "Oil":true, "Sliced Bread":true})
+
+  const handleAccordionChange = (category) => {
+    const newValue = activeAccordion === category ? "" : category;
+    setActiveAccordion(newValue);
+  };
 
   useEffect(() => {
     var open = global.firstTime
@@ -81,19 +84,19 @@ function Cabinet() {
   }
 
   return (
-    <div>
+    <div className="pantry-page">
       <h2 className="page-title">My Pantry</h2>
       <div className="row">
         <div className="col-6 text-center">
           <div className="images">
             <img src="/images/Shelf.svg" alt="shelf" className="shelf"/>
-            <img src="/images/Proteins.svg" alt="proteins" className="proteins" onClick={() => setActiveAccordion("Proteins")}/>
-            <img src="/images/Vegetables.svg" alt="vegetables" className="vegetables" onClick={() => setActiveAccordion("Vegetables")}/>
-            <img src="/images/Fruits.svg" alt="fruits" className="fruits" onClick={() => setActiveAccordion("Fruits")}/>
-            <img src="/images/Dairy.svg" alt="dairy" className="dairy" onClick={() => setActiveAccordion("Dairy")}/>
-            <img src="/images/Grains.svg" alt="grains" className="grains" onClick={() => setActiveAccordion("Grains")}/>
-            <img src="/images/Essentials.svg" alt="essentials" className="essentials" onClick={() => setActiveAccordion("Essentials")}/>
-            <img src="/images/Other.svg" alt="other" className="other" onClick={() => setActiveAccordion("Other")}/>
+            <img src="/images/Proteins.svg" alt="proteins" className="proteins" onClick={() => handleAccordionChange("Proteins")}/>
+            <img src="/images/Vegetables.svg" alt="vegetables" className="vegetables" onClick={() => handleAccordionChange("Vegetables")}/>
+            <img src="/images/Fruits.svg" alt="fruits" className="fruits" onClick={() => handleAccordionChange("Fruits")}/>
+            <img src="/images/Dairy.svg" alt="dairy" className="dairy" onClick={() => handleAccordionChange("Dairy")}/>
+            <img src="/images/Grains.svg" alt="grains" className="grains" onClick={() => handleAccordionChange("Grains")}/>
+            <img src="/images/Essentials.svg" alt="essentials" className="essentials" onClick={() => handleAccordionChange("Basics")}/>
+            <img src="/images/Other.svg" alt="other" className="other" onClick={() => handleAccordionChange("Other")}/>
           </div>
         </div>
         <div className="col-6 text-center">
@@ -109,7 +112,7 @@ function Cabinet() {
                 </DialogContent>
             </DialogPortal>
           </Dialog>
-          <FoodList activeAccordion={activeAccordion} setValue={setActiveAccordion}/>
+          <FoodList activeAccordion={activeAccordion} setValue={handleAccordionChange} />
 
           {/* Essentials dialog */}
           <Dialog open = {openEssentials} onOpenChange={setOpenEssentials}>

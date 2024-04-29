@@ -4,74 +4,102 @@ import { doc, setDoc } from 'firebase/firestore';
 import { db } from '../config/Firebase';
 
 function AddGroceries() {
-    const [newFood, setNewFood] = useState("");
-    const [category, setCategory] = useState("");
+    const [groceryItems, setGroceryItems] = useState([{ newFood: "", category: "" }]);
 
     const handleSave = async () => {
-        if (newFood && category) {
-            const UserID = sessionStorage.getItem('UserID');
-            if (!UserID) {
-                console.error("UserID is undefined.");
-                return;
-            }
-            const categoryRef = doc(db, "users", UserID, "ingredients", category);
-            const allRef = doc(db, "users", UserID, "ingredients", "All");
-
-            try {
-                await setDoc(categoryRef, { [newFood]: true }, { merge: true });
-                await setDoc(allRef, { [newFood]: true }, { merge: true });
-
-                console.log("New food added successfully.");
-                window.location.reload();
-            } catch (error) {
-                console.error("Error adding new food: ", error);
-            }
-        } else {
-            console.error("Food name or category is missing.");
+        const UserID = sessionStorage.getItem('UserID');
+        if (!UserID) {
+            console.error("UserID is undefined.");
+            return;
         }
+
+        for (const { newFood, category } of groceryItems) {
+            if (newFood && category) {
+                const categoryRef = doc(db, "users", UserID, "ingredients", category);
+                const allRef = doc(db, "users", UserID, "ingredients", "All");
+
+                try {
+                    await setDoc(categoryRef, { [newFood]: true }, { merge: true });
+                    await setDoc(allRef, { [newFood]: true }, { merge: true });
+                } catch (error) {
+                    console.error("Error adding new food: ", error);
+                    return; // Stop the loop if there is an error
+                }
+            } else {
+                console.error("Food name or category is missing.");
+                return; // Stop the loop if there is a missing field
+            }
+        }
+
+        console.log("All new foods added successfully.");
+        alert("All new foods added to pantry!");
+        window.location.reload();
     };
 
+    const addGroceryItem = () => {
+        setGroceryItems([...groceryItems, { newFood: "", category: "" }]);
+    };
+
+    const updateGroceryItem = (index, field, value) => {
+        const newGroceryItems = [...groceryItems];
+        newGroceryItems[index][field] = value;
+        setGroceryItems(newGroceryItems);
+    };
+
+    const isSaveDisabled = groceryItems.some(item => item.newFood === "" || item.category === "");
+
     return (
-        <div>
+        <div className="add-groceries">
             <div className="title">Add Groceries</div>
             <div className="row mb-3">
                 <div className="col-sm-6">
-                    <label htmlFor="cookingTime" className="form-label">Food Name</label>
-                    <input
-                    type="text"
-                    id="cookingTime"
-                    className="form-control"
-                    value={newFood}
-                    onChange={(e) => setNewFood(e.target.value)}
-                    />
+                    <label htmlFor="foodName" className="form-label">Food Name</label>
                 </div>
                 <div className="col-sm-6">
                     <label htmlFor="category" className="form-label">Category</label>
-                    <select
-                        id="category"
-                        className="form-select"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                    >
-                        <option value="">Select</option>
-                        <option value="Proteins">Proteins</option>
-                        <option value="Vegetables">Vegetables</option>
-                        <option value="Fruits">Fruits</option>
-                        <option value="Dairy">Dairy</option>
-                        <option value="Grains">Grains</option>
-                        <option value="Basics">Essentials</option>
-                        <option value="Other">Other</option>
-                    </select>
                 </div>
             </div>
+            {groceryItems.map((item, index) => (
+                <div key={index} className="row mb-3">
+                    <div className="col-sm-6">
+                        <input
+                            type="text"
+                            id={`foodName-${index}`}
+                            className="form-control"
+                            placeholder="Enter food name"
+                            value={item.newFood}
+                            onChange={(e) => updateGroceryItem(index, 'newFood', e.target.value)}
+                        />
+                    </div>
+                    <div className="col-sm-6">
+                        <select
+                            id={`category-${index}`}
+                            className="form-select"
+                            value={item.category}
+                            onChange={(e) => updateGroceryItem(index, 'category', e.target.value)}
+                        >
+                            <option value="">Select</option>
+                            <option value="Proteins">Proteins</option>
+                            <option value="Vegetables">Vegetables</option>
+                            <option value="Fruits">Fruits</option>
+                            <option value="Dairy">Dairy</option>
+                            <option value="Grains">Grains</option>
+                            <option value="Basics">Essentials</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+            ))}
             <div className="d-flex justify-content-center"> 
-                <div className="plus">
+                <button onClick={addGroceryItem} className="plus">
                     <PlusIcon/>
-                </div>
+                </button>
             </div>
-            <button type="button" className="btn btn-primary add-button" onClick={() => {handleSave(); alert("Added to pantry!")}}>Save</button>
+            <div className="d-flex justify-content-end"> 
+                <button type="button" className="btn btn-primary add-button" onClick={handleSave} disabled={isSaveDisabled}>Save All</button>
+            </div>
         </div>
-    )
+    );
 }
 
 export default AddGroceries;
