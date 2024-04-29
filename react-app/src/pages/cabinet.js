@@ -102,7 +102,7 @@ function Cabinet() {
         <div className="col-6 text-center">
           <Dialog>
             <DialogTrigger>
-                <button type="button" class="btn btn-success">add grocery haul</button>
+                <button type="button" class="btn btn-success">Add Items</button>
             </DialogTrigger>
             <DialogPortal>
                 <DialogOverlay className="DialogOverlay"/>
