@@ -161,8 +161,8 @@ function Cabinet() {
                     </Box>
                     <div style={{display:'flex', justifyContent: 'center'}}>
                       <button type="button" class="btn btn-success" 
-                        onClick={() => {handleSubmit();handleClose();}}>
-                        submit preferences!
+                        onClick={() => {handleSubmit();handleClose();window.location.reload();}}>
+                        save essentials!
                       </button>
 
                     </div>
