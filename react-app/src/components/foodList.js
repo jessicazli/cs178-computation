@@ -81,7 +81,7 @@ function FoodList({ activeAccordion, setValue }) {
 
         return filteredItems.map((key) => (
             <div className="AccordionInfo2" key={key}>
-                <div>{key}</div>
+                <div className="food-item">{key}</div>
                 <TrashIcon className="trash-icon" onClick={() => deleteItem(key, category)}/>
             </div>
         ));
@@ -89,11 +89,13 @@ function FoodList({ activeAccordion, setValue }) {
 
     return (
         <div className="food-list"> 
-            <Accordion className="AccordionRoot" type="single" value={activeAccordion} onValueChange={setValue}>
+            <Accordion className="AccordionRoot" type="single" collapsible value={activeAccordion} onValueChange={setValue}>
                 {categories.map((category) => (
-                    <AccordionItem key={category} value={category.toLowerCase()} data-state={activeAccordion === category.toLowerCase() ? 'open' : 'closed'}>
+                    <AccordionItem key={category} value={category}>
                         <AccordionTrigger className="sticky-line">
-                            <div>{category}</div>
+                            <div>
+                                {category === "Basics" ? "Essentials" : category}
+                            </div>
                         </AccordionTrigger>
                         <AccordionContent>
                             {renderContent(category)}
