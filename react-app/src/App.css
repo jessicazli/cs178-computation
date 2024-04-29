@@ -324,10 +324,14 @@ h3 {
   align-items: center;
   justify-content: center;
   border: 1px solid #ccc;
+  transition: transform 0.3s ease-in-out;
+}
+
+.plus:hover {
+  transform: scale(1.1);
 }
 
 .add-button {
-  position: absolute;
   bottom: 20px;
   right: 20px;
 }
