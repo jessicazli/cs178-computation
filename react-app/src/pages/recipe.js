@@ -153,12 +153,15 @@ function Recipe() {
     }
 
     return (
-      <div className="container">
+      // <div className="container row">
+      <div>
+      <img src="/images/kitchen.png" alt="kitchen" className="background-image kitchen bg-image" />
+      <div className="container col-md-5 recipe">
       <h2 className="text-center mb-4">Generate a Recipe</h2>
-      <p className="text-center mb-4">Using the ingredients from your virtual pantry, we will generate a recipe you can make right now without going to the grocery store.</p>
+      <p className="text-left mb-4">Using the ingredients from your virtual pantry, we will generate a recipe you can make right now without going to the grocery store.</p>
 
       <div className="row justify-content-center">
-    <div className="col-md-8">
+    <div className="col-md-12">
       <form onSubmit={handleSubmit}>
         <div className="row mb-3">
           <div className="col-sm-6">
@@ -172,7 +175,7 @@ function Recipe() {
             />
           </div>
           <div className="col-sm-6">
-            <label htmlFor="cookingTime" className="form-label">Maximum Cooking Time (in minutes):</label>
+            <label htmlFor="cookingTime" className="form-label">Max Cooking Time (in min):</label>
             <input
               type="text"
               id="cookingTime"
@@ -275,7 +278,7 @@ function Recipe() {
   </div>
       {result && (
         <div className="row justify-content-center mt-5">
-          <div className="col-md-8">
+          <div className="col-md-12">
             <div className="card">
               <div className="card-header">
                 <div className="save-recipe">
@@ -305,12 +308,15 @@ function Recipe() {
                   <strong>Instructions:</strong>
                   <pre>{result}</pre>
                 </p>
+                <img src="/images/pin.png" className="pushpin"></img>
+
               </div>
             </div>
             <p></p>
           </div>
         </div>
       )}
+    </div>
     </div>
     );
   }   

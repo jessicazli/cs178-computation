@@ -63,6 +63,7 @@ function Saved() {
         <p className="card-text">
             <strong>Cooking Time:</strong> {recipe.cooking_time}
         </p>
+        <hr className="paper-line"/>
         <p className="card-text">
             <strong>Ingredients:</strong>
             <ul>
@@ -71,6 +72,7 @@ function Saved() {
             ))}
             </ul>
         </p>
+        <hr className="paper-line"/>
         <p className="card-text">
             <strong>Instructions:</strong>
             <pre>{recipe.recipe}</pre>
