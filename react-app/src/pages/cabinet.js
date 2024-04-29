@@ -13,8 +13,6 @@ import { FaVihara } from "react-icons/fa";
 
 function Cabinet() {
 
-  // TODO: have to figure out clicking on the images to open the correct accordion
-
   const [activeAccordion, setActiveAccordion] = useState("");
   const [openEssentials, setOpenEssentials] = useState(false);
   const [changedEssentials, setChangedEssentials] = useState([])
@@ -86,7 +84,7 @@ function Cabinet() {
   }
 
   return (
-    <div>
+    <div className="pantry-page">
       <h2 className="page-title">My Pantry</h2>
       <div className="row">
         <div className="col-6 text-center">

@@ -64,6 +64,7 @@
 .page-title {
   text-align: center;
   padding-bottom: 20px;
+  padding-top: 30px;
 }
 
 /* accordion */
@@ -75,7 +76,7 @@ h3 {
 .AccordionRoot {
   width: 100%;
   background-color: #c0c9d1;
-  max-height: calc(100vh - 280px);
+  max-height: calc(100vh - 320px);
   overflow-y: auto;
   border: 1px solid #ccc;
 }
@@ -356,6 +357,7 @@ h3 {
 .tackboard {
   background-color: #fce5cd; /* Light brown background color */
   /* padding: 20px; */
+  height: 89.5vh;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -461,4 +463,9 @@ h3 {
 
 #loader {
   display: none;
+}
+
+.pantry-page {
+  background-color: #C4D8C7;
+  height: 89.5vh;
 }
