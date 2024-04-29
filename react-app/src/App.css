@@ -182,6 +182,10 @@ h3 {
   padding: 40px;
 }
 
+.food-item {
+  padding-left: 20px;
+}
+
 .trash-icon:hover {
   color: red;
   cursor: pointer;
