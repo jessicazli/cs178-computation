@@ -113,7 +113,7 @@ function Recipe() {
 
         const completion = await openai.chat.completions.create({
         messages: messages,
-        model: "gpt-4-turbo",
+        model: "gpt-3.5-turbo",
         response_format:{ "type": "json_object" },
         });
 
@@ -155,6 +155,8 @@ function Recipe() {
     return (
       <div className="container">
       <h2 className="text-center mb-4">Generate a Recipe</h2>
+      <p className="text-center mb-4">Using the ingredients from your virtual pantry, we will generate a recipe you can make right now without going to the grocery store.</p>
+
       <div className="row justify-content-center">
     <div className="col-md-8">
       <form onSubmit={handleSubmit}>

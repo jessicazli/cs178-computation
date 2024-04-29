@@ -42,17 +42,10 @@ function App() {
                         element={<Cabinet />}
                     />
                     <Route
-<<<<<<< HEAD
-                        path="/profile"
-                        element={<Profile />}
-                    />
-                    <Route
                         path="/saved"
                         element={<Saved />}
                     />
                     <Route
-=======
->>>>>>> e4a65b675f2214c92da368ab700cb8c285272028
                         path="/recipe"
                         element={<Recipe />}
                     />
