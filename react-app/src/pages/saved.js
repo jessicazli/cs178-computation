@@ -6,9 +6,9 @@ import { setDoc, doc, getDoc } from "firebase/firestore";
 import { collection, getDocs }from "firebase/firestore";
 import { grid } from 'ldrs'
 
+// cookbook concept
+
 grid.register()
-
-
 
 function Saved() {
 

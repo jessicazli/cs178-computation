@@ -11,6 +11,8 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { FaVihara } from "react-icons/fa";
 
+//pantry concept
+
 function Cabinet() {
 
   const [activeAccordion, setActiveAccordion] = useState("");

@@ -14,6 +14,8 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
+//recipe concept
+
 grid.register()
 
 const apiKey = process.env.REACT_APP_OPENAI_API_KEY;
