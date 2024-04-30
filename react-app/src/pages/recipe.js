@@ -165,8 +165,8 @@ function Recipe() {
         recipe you can make right now without going to the grocery store.
         <Tooltip placement="right" title="The preferences you enter will be used in a prompt we write, which is 
         fed to ChatGPT 3.5 to generate your recipe! However, the model results are not 100% accurate and 
-        some preferences might not be accounted for in the generated recipe. If this happens, simply click 
-        the 'Generate Recipe' button again for a new recipe!">
+        some preferences might not be accounted for in the generated recipe. If this happens and you are unhappy 
+        with your generated recipe, simply click the 'Generate Recipe' button again for a new recipe!">
           <IconButton>
             <HelpOutlineIcon fontSize="small" sx={{width:'15px'}}/>
           </IconButton>
