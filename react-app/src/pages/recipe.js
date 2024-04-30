@@ -10,6 +10,9 @@ import * as React from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
 grid.register()
 
@@ -158,7 +161,17 @@ function Recipe() {
       <img src="/images/kitchen.png" alt="kitchen" className="background-image kitchen bg-image" />
       <div className="container col-md-5 recipe">
       <h2 className="text-center mb-4">Generate a Recipe</h2>
-      <p className="text-left mb-4">Using the ingredients from your virtual pantry, we will generate a recipe you can make right now without going to the grocery store.</p>
+      <p className="text-left mb-4">Using the ingredients from your virtual pantry, we will generate a 
+        recipe you can make right now without going to the grocery store.
+        <Tooltip placement="right" title="The preferences you enter will be used in a prompt we write, which is 
+        fed to ChatGPT 3.5 to generate your recipe! However, the model results are not 100% accurate and 
+        some preferences might not be accounted for in the generated recipe. If this happens, simply click 
+        the 'Generate Recipe' button again for a new recipe!">
+          <IconButton>
+            <HelpOutlineIcon fontSize="small" sx={{width:'15px'}}/>
+          </IconButton>
+        </Tooltip>
+      </p>
 
       <div className="row justify-content-center">
     <div className="col-md-12">
@@ -288,7 +301,7 @@ function Recipe() {
                       handleSaveRecipe();
                     }}>
                     Save Recipe
-                  </Button> {/* make it space between */}
+                  </Button>
                  
                 </div>
               </div>
